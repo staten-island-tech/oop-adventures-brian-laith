@@ -2,7 +2,7 @@ import json
 import os
 more = "True"
 ## Create Class for creating new dictionaries here
-class character:
+class card:
     def makeCard(self,name,hp,ability,specialMana):
         self.name = name
         self.hp = hp
@@ -19,9 +19,9 @@ while again == "true":
         ##Call classes in here
         card = card()
         name = input("State the card's name: ")
-        hp = input("State the card's HP: ")
+        hp = int(input("State the card's HP: "))
         ability = input("State the card's ability name: ")
-        specialMana = input("State the card's ability cost: ")
+        specialMana = int(input("State the card's ability cost: "))
         newCard = card.makeCard(name, hp, ability, specialMana)
         data.append(newCard)
         print(data)
@@ -46,6 +46,6 @@ while again == "true":
     # Overwrite the old JSON file with the new one
     os.remove("data.json")
     os.rename(new_file, "data.json")
-    userMore = input("Do you want to add another character (Y/N): ")
+    userMore = input("Do you want to add another card (Y/N): ")
     if userMore == "N":
         again = "false"

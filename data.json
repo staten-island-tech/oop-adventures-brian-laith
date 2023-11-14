@@ -1,1 +1,8 @@
-[]
+[
+{
+"name": "Archer",
+"hp": 50,
+"special ability": "Volley",
+"special ability cost": 3
+}
+]
