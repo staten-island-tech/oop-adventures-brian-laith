@@ -1,8 +1,107 @@
 [
-{
-"name": "Archer",
-"hp": 50,
-"special ability": "Volley",
-"special ability cost": 3
-}
+    {
+        "name": "Archer",
+        "hp": 50,
+        "damage": 20,
+        "special ability": "Volley",
+        "special ability cost": 3
+    },
+    {
+        "name": "Soldier",
+        "hp": 100,
+        "damage": 30,
+        "special ability": "Dash",
+        "special ability cost": 2
+    },
+    {
+        "name": "Ninja",
+        "hp": 75,
+        "damage": 30,
+        "special ability": "Backstab",
+        "special ability cost": 4
+    },
+    {
+        "name": "Knight",
+        "hp": 150,
+        "damage": 20,
+        "special ability": "Charge",
+        "special ability cost": 2
+    },
+    {
+        "name": "Bomber",
+        "hp": 30,
+        "damage": 50,
+        "special ability": "Bombs Away",
+        "special ability cost": 3
+    },
+    {
+        "name": "Hunter",
+        "hp": 80,
+        "damage": 40,
+        "special ability": "Headshot",
+        "special ability cost": 3
+    },
+    {
+        "name": "Skeleton Army",
+        "hp": 80,
+        "damage": 40,
+        "special ability": "Outnumber",
+        "special ability cost": 2
+    },
+    {
+        "name": "Prince",
+        "hp": 100,
+        "damage": 25,
+        "special ability": "The Kings Call",
+        "special ability cost": 3
+    },
+    {
+        "name": "Wizard",
+        "hp": 60,
+        "damage": 30,
+        "special ability": "Fireball",
+        "special ability cost": 2
+    },
+    {
+        "name": "Barbarians",
+        "hp": 100,
+        "damage": 30,
+        "special ability": "Slash",
+        "special ability cost": 2
+    },
+    {
+        "name": "Elite Barbarians",
+        "hp": 80,
+        "damage": 50,
+        "special ability": "Slash",
+        "special ability cost": 2
+    },
+    {
+        "name": "Musketeer",
+        "hp": 75,
+        "damage": 40,
+        "special ability": "Cannon Shot",
+        "special ability cost": 3
+    },
+    {
+        "name": "Giant",
+        "hp": 200,
+        "damage": 20,
+        "special ability": "Smash",
+        "special ability cost": 3
+    },
+    {
+        "name": "Valkyrie",
+        "hp": 150,
+        "damage": 30,
+        "special ability": "Axe Throw",
+        "special ability cost": 3
+    },
+    {
+        "name": "Baby Dragon",
+        "hp": 80,
+        "damage": 40,
+        "special ability": "Fire Breath",
+        "special ability cost": 4
+    }
 ]
