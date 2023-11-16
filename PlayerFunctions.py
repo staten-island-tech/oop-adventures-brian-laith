@@ -17,10 +17,27 @@ for i in range(5):
     rand2 = random.randint(0,length-1)
     player2.extend([data[rand2]])
 
-print('Player one cards:')
+print("\nPlayer one's cards:\n")
 for i in range(5):
-    print(player1[i], end ='\n')
+    print(player1[i],'\n')
 
-print('\nPlayer two cards:')
+print("\nPlayer two's cards:\n")
 for i in range(5):
-    print(player2[i], end ='\n')
+    print(player2[i],'\n')
+
+
+
+firstPlayer = random.randint(1,2)
+playerCards = 'Alive'
+def player1turn():
+    for i in range(len(player1)):
+        print(player1[i], end ='\n')
+    cardUse = int(input("State the number of the card you'd like to use: "))
+    special = int(input("State whether you'd like to use your card (Y/N): "))
+    cardInteract = int(input("State the number of the card you'd like to interact with: "))
+    if special == 'Y':
+        specialAttackDmg = data
+
+
+while playerCards == 'Alive':
+    if firstPlayer == 1:
