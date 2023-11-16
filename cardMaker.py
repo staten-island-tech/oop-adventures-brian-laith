@@ -10,7 +10,7 @@ class Card:
         self.ability = ability
         self.abilityDmg = abilityDmg
         self.specialMana = specialMana
-        card = {'name':name,'hp':hp,'damage':dmg,'special ability':ability,'special ability cost':specialMana}
+        card = {'name':name,'hp':hp,'damage':dmg,'special ability':ability,'special ability damage':abilityDmg,'special ability cost':specialMana}
         return card
 
 again = "true"
