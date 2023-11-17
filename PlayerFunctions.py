@@ -32,11 +32,18 @@ playerCards = 'Alive'
 def player1turn():
     for i in range(len(player1)):
         print(player1[i], end ='\n')
-    cardUse = int(input("State the number of the card you'd like to use: "))
+    cardUse = input("State the name of the card you'd like to use: ")
     special = int(input("State whether you'd like to use your card (Y/N): "))
-    cardInteract = int(input("State the number of the card you'd like to interact with: "))
+    cardInteract = (input("State the name of the card you'd like to interact with: "))
+    for i in range(len(data)):
+        if data[i] == data[cardUse]:
+            cardUseID = i
+        if data[i] == data[cardInteract]:
+            cardInteractID = i
     if special == 'Y':
-        specialAttackDmg = data
+        specialAttackDmg = data[i]['special ability damage']
+
+    
 
 
 while playerCards == 'Alive':
