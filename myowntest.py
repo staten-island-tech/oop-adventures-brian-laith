@@ -53,6 +53,5 @@ class Game():
             print("No results found. Run the code again.")
             exit()
         print(play)
-    
 g = Game()
 g.run()
