@@ -47,6 +47,11 @@ class Game():
             for i in range(5):
                 if CardPlay in player2[i]['name']:
                     play = player2[i]['name']
+        try:
+            play
+        except NameError:
+            print("No results found. Run the code again.")
+            exit()
         print(play)
     
 g = Game()
