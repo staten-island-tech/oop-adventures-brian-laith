@@ -4,7 +4,10 @@ test = open("data.json", encoding="utf8")
 data = json.load(test)
 player1 = []
 player2 = []
-cardUse = str(input("test: "))
-print(data[1][cardUse])
-if data[1]["name"] == data[1][cardUse]:
-    print("good")
+cardUse = input("test: ")
+x= len(data)
+for i in range(x):
+    if cardUse in data[i]['name']:
+        player1.extend([data[i]["name"]])
+
+print(player1)

@@ -27,25 +27,46 @@ for i in range(5):
     print(player2[i],'\n')
 
 
-
+cardUseID = 1
+cardAttackID = 1
+newCardListID = 1
 firstPlayer = random.randint(1,2)
 playerCards = 'Alive'
+nextListPart = 0
+player1HP = []
+player2HP = []
+
+for i in range(5):
+    for i in range(length):
+        if player1[nextListPart]['name'] in data[i]['name']:
+            player1HP.append(data[i]['health'])
+            nextListPart += 1
+print(player1HP)
+
+
+
 def player1turn():
     for i in range(length):
         print(player1[i], end ='\n')
     cardUse = input("State the name of the card you'd like to use: ")
     special = int(input("State whether you'd like to use your card (Y/N): "))
     cardInteract = (input("State the name of the card you'd like to interact with: "))
-    for i in range(len(data)):
-        if data[i] == data[cardUse]:
+    for i in range(length):
+        if cardUse in data[i]['name']:
             cardUseID = i
-        if data[i] == data[cardInteract]:
-            cardInteractID = i
-    if special == 'Y':
-        specialAttackDmg = data[i]['special ability damage']
+        if cardUse in data[i]['name']:
+            cardAttackID = i
 
+    for i in range(len(player2)):
+        if cardInteract in player2[i]:
+            newCardListID = i
     
+    if special == 'Y':
+        specialAttackDmg = data[cardUseID]['special ability damage']
+
+        
 
 
 while playerCards == 'Alive':
     if firstPlayer == 1:
+        print('Hi')
