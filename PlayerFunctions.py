@@ -9,13 +9,14 @@ player1 = []
 player2 = []
 length = len(data)
 
+
+rand1 = random.sample(range(length-1), 5)
+rand2 = random.sample(range(length-1), 5)
 for i in range(5):
-    rand1 = random.randint(0,length-1)
-    player1.extend([data[rand1]])
+    player1.extend([data[rand1[i]]])
 
 for i in range(5):
-    rand2 = random.randint(0,length-1)
-    player2.extend([data[rand2]])
+    player2.extend([data[rand2[i]]])
 
 print("\nPlayer one's cards:\n")
 for i in range(5):
