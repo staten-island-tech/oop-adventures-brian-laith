@@ -31,7 +31,7 @@ for i in range(5):
 firstPlayer = random.randint(1,2)
 playerCards = 'Alive'
 def player1turn():
-    for i in range(len(player1)):
+    for i in range(length):
         print(player1[i], end ='\n')
     cardUse = input("State the name of the card you'd like to use: ")
     special = int(input("State whether you'd like to use your card (Y/N): "))
