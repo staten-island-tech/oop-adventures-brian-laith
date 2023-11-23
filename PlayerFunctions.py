@@ -32,6 +32,7 @@ newCardListID = 0
 interactCardListID = 0
 specialAtttackDmg = 0
 firstPlayer = random.randint(1,2)
+global playerCards
 playerCards = 'Alive'
 player1HP = []
 player2HP = []
@@ -94,8 +95,8 @@ class playerTurns():
             interactCardHP = player2[interactCardListID]['hp'] - specialAttackDmg
             player2[interactCardListID]['hp'] = interactCardHP
             if player2[interactCardListID]['hp'] < 1:
+                print('\n',player2[interactCardListID]['name'],'has died \n')
                 del (player2[interactCardListID])
-                print(player2[interactCardListID]['name'],'has died')
                 print("player 2's cards are now:\n")
                 for i in range(len(player2)):
                     print(player2[i],'\n')
@@ -106,13 +107,19 @@ class playerTurns():
             interactCardHP = player2[interactCardListID]['hp'] - normalAttackDmg
             player2[interactCardListID]['hp'] = interactCardHP
             if player2[interactCardListID]['hp'] < 1:
+                print('\n',player2[interactCardListID]['name'],'has died \n')
                 del (player2[interactCardListID])
-                print(player2[interactCardListID]['name'],'has died')
                 print("player 2's cards are now:\n")
+                if player1 == []:
+                    print("All dead")
                 for i in range(len(player2)):
                     print(player2[i],'\n')
             else:
-                print(player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp')
+                print('\n',player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
+            if player2 == []:
+                global playerCards
+                playerCards = 'Dead'
+                print("Player 1 has won the match!")
 
     def player2turn(self):
         print("Player 2's turn!\n")
@@ -134,8 +141,8 @@ class playerTurns():
             interactCardHP = player1[interactCardListID]['hp'] - specialAttackDmg
             player1[interactCardListID]['hp'] = interactCardHP
             if player1[interactCardListID]['hp'] < 1:
+                print('\n',player1[interactCardListID]['name'],'has died \n')
                 del (player1[interactCardListID])
-                print(player1[interactCardListID]['name'],'has died')
                 print("player 1's cards are now:\n")
                 for i in range(len(player1)):
                     print(player1[i],'\n')
@@ -146,13 +153,19 @@ class playerTurns():
             interactCardHP = player1[interactCardListID]['hp'] - normalAttackDmg
             player1[interactCardListID]['hp'] = interactCardHP
             if player1[interactCardListID]['hp'] < 1:
+                print('\n',player1[interactCardListID]['name'],'has died \n')
                 del (player1[interactCardListID])
-                print(player1[interactCardListID]['name'],'has died')
                 print("player 1's cards are now:\n")
+                if player1 == []:
+                    print("All dead")
                 for i in range(len(player1)):
                     print(player1[i],'\n')
             else:
-                print(player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp')
+                print('\n',player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
+        if player1 == []:
+            global playerCards
+            playerCards = 'Dead'
+            print("Player 2 has won the match!")
 
 playerturn = playerTurns()   
 
