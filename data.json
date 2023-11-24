@@ -37,7 +37,7 @@
         "damage": 50,
         "special ability": "Bombs Away",
         "special ability damage": 100,
-        "special ability cost": 3
+        "special ability cost": 2
     },
     {
         "name": "Hunter",

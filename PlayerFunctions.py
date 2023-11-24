@@ -39,9 +39,9 @@ player1Mana = 0
 player2Mana = 0
 manaCheck = "no"
 playerSet = 'no'
-global tryAgain
 tryAgain = 'N'
-
+global special
+special = 'test'
 
 
 
@@ -52,6 +52,9 @@ class playerTurns():
         global player1Mana
         player1Mana += 2
         print("Player 1's turn!\n")
+        print("\nYour cards:\n")
+        for i in range(len(player1)):
+            print(player1[i],'\n')
         print("You have",player1Mana,"mana \n")
         playerSet = 'no'
         while playerSet == 'no':
@@ -59,6 +62,7 @@ class playerTurns():
             playerSet = 'no'
             manaCheck = "no"
             cardUse = input("State the name of the card you'd like to use: ")
+            global special
             special = input("State whether you'd like to use your card's special ability (Y/N): ")
             cardInteract = input("State the name of the card you'd like to interact with: ")
             for i in range(length):
@@ -80,10 +84,14 @@ class playerTurns():
                         manaCheck = 'yes'
                         playerSet = 'Y'
                     else:
-                        tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)?")
+                        tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
                     if tryAgain == 'N':
                         special = 'N'
+                        manaCheck = 'yes'
+                    else:
+                        manaCheck = 'yes'
                 else:
+                    manaCheck = 'yes'
                     playerSet = 'Y'
 
         if special == 'Y':
@@ -111,9 +119,7 @@ class playerTurns():
                 for i in range(len(player2)):
                     print(player2[i],'\n')
             else:
-                print('\n')
                 print('\n',player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
-                print('\n')
             if player2 == []:
                 global playerCards
                 playerCards = 'Dead'
@@ -123,6 +129,9 @@ class playerTurns():
         global player2Mana
         player2Mana += 2
         print("Player 2's turn!\n")
+        print("\nYour cards:\n")
+        for i in range(len(player2)):
+            print(player2[i],'\n')
         print("You have",player2Mana,"mana \n")
         playerSet = 'no'
         while playerSet == 'no':
@@ -130,6 +139,7 @@ class playerTurns():
             playerSet = 'no'
             manaCheck = "no"
             cardUse = input("State the name of the card you'd like to use: ")
+            global special
             special = input("State whether you'd like to use your card's special ability (Y/N): ")
             cardInteract = input("State the name of the card you'd like to interact with: ")
             for i in range(length):
@@ -151,11 +161,15 @@ class playerTurns():
                         manaCheck = 'yes'
                         playerSet = 'Y'
                     else:
-                        tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)?")
+                        tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
                     if tryAgain == 'N':
                         special = 'N'
+                        manaCheck = 'yes'
+                    else:
+                        manaCheck = 'yes'
                 else:
                     playerSet = 'Y'
+                    manaCheck = 'yes'
 
         if special == 'Y':
             specialAttackDmg = data[cardUseID]['special ability damage']
