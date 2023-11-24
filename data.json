@@ -4,7 +4,8 @@
         "hp": 50,
         "damage": 20,
         "special ability": "Volley",
-        "special ability damage": 70,
+        "ability type": "aoe",
+        "special ability damage": 25,
         "special ability cost": 3
     },
     {
@@ -12,6 +13,7 @@
         "hp": 100,
         "damage": 30,
         "special ability": "Dash",
+        "ability type": "attack",
         "special ability damage": 50,
         "special ability cost": 2
     },
@@ -20,6 +22,7 @@
         "hp": 75,
         "damage": 30,
         "special ability": "Backstab",
+        "ability type": "attack",
         "special ability damage": 100,
         "special ability cost": 4
     },
@@ -28,6 +31,7 @@
         "hp": 150,
         "damage": 20,
         "special ability": "Charge",
+        "ability type": "attack",
         "special ability damage": 40,
         "special ability cost": 2
     },
@@ -36,7 +40,8 @@
         "hp": 30,
         "damage": 50,
         "special ability": "Bombs Away",
-        "special ability damage": 100,
+        "ability type": "aoe",
+        "special ability damage": 50,
         "special ability cost": 2
     },
     {
@@ -44,6 +49,7 @@
         "hp": 80,
         "damage": 40,
         "special ability": "Headshot",
+        "ability type": "attack",
         "special ability damage": 65,
         "special ability cost": 3
     },
@@ -52,7 +58,8 @@
         "hp": 80,
         "damage": 30,
         "special ability": "Outnumber",
-        "special ability damage": 55,
+        "ability type": "aoe",
+        "special ability damage": 15,
         "special ability cost": 2
     },
     {
@@ -60,6 +67,7 @@
         "hp": 100,
         "damage": 25,
         "special ability": "The Kings Call",
+        "ability type": "attack",
         "special ability damage": 70,
         "special ability cost": 3
     },
@@ -68,6 +76,7 @@
         "hp": 60,
         "damage": 30,
         "special ability": "Fireball",
+        "ability type": "attack",
         "special ability damage": 60,
         "special ability cost": 2
     },
@@ -76,6 +85,7 @@
         "hp": 100,
         "damage": 30,
         "special ability": "Slash",
+        "ability type": "attack",
         "special ability damage": 50,
         "special ability cost": 2
     },
@@ -84,6 +94,7 @@
         "hp": 80,
         "damage": 50,
         "special ability": "Slash",
+        "ability type": "attack",
         "special ability damage": 75,
         "special ability cost": 3
     },
@@ -92,6 +103,7 @@
         "hp": 75,
         "damage": 40,
         "special ability": "Cannon Shot",
+        "ability type": "attack",
         "special ability damage": 70,
         "special ability cost": 3
     },
@@ -100,7 +112,8 @@
         "hp": 200,
         "damage": 20,
         "special ability": "Smash",
-        "special ability damage": 65,
+        "ability type": "aoe",
+        "special ability damage": 25,
         "special ability cost": 3
     },
     {
@@ -108,6 +121,7 @@
         "hp": 150,
         "damage": 30,
         "special ability": "Axe Throw",
+        "ability type": "attack",
         "special ability damage": 70,
         "special ability cost": 3
     },
@@ -116,7 +130,71 @@
         "hp": 80,
         "damage": 40,
         "special ability": "Fire Breath",
-        "special ability damage": 100,
+        "ability type": "aoe",
+        "special ability damage": 40,
         "special ability cost": 4
+    },
+    {
+        "name": "Healer",
+        "hp": 100,
+        "damage": 25,
+        "special ability": "ultra heal",
+        "ability type": "mass heal",
+        "special ability damage": 30,
+        "special ability cost": 4
+    },
+    {
+        "name": "Priest",
+        "hp": 80,
+        "damage": 20,
+        "special ability": "Divine Intervention",
+        "ability type": "mass heal",
+        "special ability damage": 25,
+        "special ability cost": 3
+    },
+    {
+        "name": "Witch",
+        "hp": 125,
+        "damage": 25,
+        "special ability": "Elixir of Eternal Youth",
+        "ability type": "single heal",
+        "special ability damage": 70,
+        "special ability cost": 3
+    },
+    {
+        "name": "Mad Scientist",
+        "hp": 80,
+        "damage": 30,
+        "special ability": "Heal Pool",
+        "ability type": "mass heal",
+        "special ability damage": 20,
+        "special ability cost": 2
+    },
+    {
+        "name": "Pheonix",
+        "hp": 80,
+        "damage": 30,
+        "special ability": "Rebirth",
+        "ability type": "self heal",
+        "special ability damage": 200,
+        "special ability cost": 5
+    },
+    {
+        "name": "Unicorn",
+        "hp": 150,
+        "damage": 25,
+        "special ability": "Unicorn Blood",
+        "ability type": "single heal",
+        "special ability damage": 75,
+        "special ability cost": 3
+    },
+    {
+        "name": "Scylla",
+        "hp": 150,
+        "damage": 30,
+        "special ability": "Regenerate",
+        "ability type": "self heal",
+        "special ability damage": 50,
+        "special ability cost": 2
     }
 ]
