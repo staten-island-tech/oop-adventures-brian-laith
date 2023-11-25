@@ -51,7 +51,7 @@ special = 'test'
 class playerTurns():
     def player1turn(self):
         global player1Mana
-        player1Mana += 10
+        player1Mana += 2
         print("Player 1's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player1)):
@@ -185,7 +185,7 @@ class playerTurns():
 
     def player2turn(self):
         global player2Mana
-        player2Mana += 10
+        player2Mana += 2
         print("Player 2's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player2)):
