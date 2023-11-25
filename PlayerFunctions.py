@@ -130,7 +130,7 @@ class playerTurns():
                     if cardInteract in player1[i]['name']:
                         interactCardListID = i
                 player1[interactCardListID]['hp'] += player1[useCardListID]['special ability damage']
-                print(player1[interactCardListID]['name'],'is at',player1[useCardListID]['hp'],'hp \n')
+                print(player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
             else:
                 specialAttackDmg = data[cardUseID]['special ability damage']
                 interactCardHP = player2[interactCardListID]['hp'] - specialAttackDmg
@@ -246,7 +246,7 @@ class playerTurns():
                     if cardInteract in player2[i]['name']:
                         interactCardListID = i
                 player2[interactCardListID]['hp'] += player2[useCardListID]['special ability damage']
-                print(player2[interactCardListID]['name'],'is at',player2[useCardListID]['hp'],'hp \n')
+                print(player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
             else:
                 specialAttackDmg = data[cardUseID]['special ability damage']
                 interactCardHP = player1[interactCardListID]['hp'] - specialAttackDmg
