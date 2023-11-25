@@ -86,6 +86,20 @@ class playerTurns():
                         else:
                             manaCheck = 'yes'
                     break
+                if player1[useCardListID]['ability type'] == 'aoe':
+                    while manaCheck == "no":
+                        if player1[useCardListID]['special ability cost'] <= player1Mana:
+                            player1Mana -= player1[useCardListID]['special ability cost']
+                            manaCheck = 'yes'
+                            playerSet = 'Y'
+                        else:
+                            tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                        if tryAgain == 'N':
+                            special = 'N'
+                            manaCheck = 'yes'
+                        else:
+                            manaCheck = 'yes'
+                    break
             cardInteract = input("State the name of the card you'd like to interact with: ")
             for i in range(length):
                 if cardUse in data[i]['name']:
@@ -131,6 +145,10 @@ class playerTurns():
                         interactCardListID = i
                 player1[interactCardListID]['hp'] += player1[useCardListID]['special ability damage']
                 print(player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
+            elif player2[useCardListID]['ability type'] == 'aoe':
+                for i in range(len(player1)):
+                        player1[i]['hp'] -= player2[useCardListID]['special ability damage']
+                        print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n')
             else:
                 specialAttackDmg = data[cardUseID]['special ability damage']
                 interactCardHP = player2[interactCardListID]['hp'] - specialAttackDmg
@@ -202,6 +220,20 @@ class playerTurns():
                         else:
                             manaCheck = 'yes'
                     break
+                if player2[useCardListID]['ability type'] == 'aoe':
+                    while manaCheck == "no":
+                        if player2[useCardListID]['special ability cost'] <= player2Mana:
+                            player2Mana -= player1[useCardListID]['special ability cost']
+                            manaCheck = 'yes'
+                            playerSet = 'Y'
+                        else:
+                            tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                        if tryAgain == 'N':
+                            special = 'N'
+                            manaCheck = 'yes'
+                        else:
+                            manaCheck = 'yes'
+                    break
             cardInteract = input("State the name of the card you'd like to interact with: ")
             for i in range(length):
                 if cardUse in data[i]['name']:
@@ -247,6 +279,10 @@ class playerTurns():
                         interactCardListID = i
                 player2[interactCardListID]['hp'] += player2[useCardListID]['special ability damage']
                 print(player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
+            elif player2[useCardListID]['ability type'] == 'aoe':
+                for i in range(len(player1)):
+                        player1[i]['hp'] -= player2[useCardListID]['special ability damage']
+                        print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n')
             else:
                 specialAttackDmg = data[cardUseID]['special ability damage']
                 interactCardHP = player1[interactCardListID]['hp'] - specialAttackDmg
