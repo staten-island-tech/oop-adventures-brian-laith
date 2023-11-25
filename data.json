@@ -81,7 +81,7 @@
         "special ability cost": 2
     },
     {
-        "name": "Barbarians",
+        "name": "Barbarian",
         "hp": 100,
         "damage": 30,
         "special ability": "Slash",
@@ -90,7 +90,7 @@
         "special ability cost": 2
     },
     {
-        "name": "Elite Barbarians",
+        "name": "Elite Barbarian",
         "hp": 80,
         "damage": 50,
         "special ability": "Slash",
