@@ -3,14 +3,15 @@ import os
 more = "True"
 ## Create Class for creating new dictionaries here
 class Card:
-    def makeCard(self,name,hp,dmg,ability,abilityDmg,specialMana):
+    def makeCard(self,name,hp,dmg,ability,abilityType,abilityDmg,specialMana):
         self.name = name
         self.hp = hp
         self.dmg = dmg
         self.ability = ability
+        self.abilityType = abilityType
         self.abilityDmg = abilityDmg
         self.specialMana = specialMana
-        card = {'name':name,'hp':hp,'damage':dmg,'special ability':ability,'special ability damage':abilityDmg,'special ability cost':specialMana}
+        card = {'name':name,'hp':hp,'damage':dmg,'special ability':ability,'ability type':abilityType,'special ability damage':abilityDmg,'special ability cost':specialMana}
         return card
 
 again = "true"
@@ -24,9 +25,10 @@ while again == "true":
         hp = int(input("State the card's HP: "))
         dmg = int(input("State the card's dmg: "))
         ability = input("State the card's ability name: ")
+        abilityType = input("State the card's ability type: ")
         abilityDmg = int(input("State the card's ability damage: "))
         specialMana = int(input("State the card's ability cost: "))
-        newCard = card.makeCard(name, hp, dmg, ability, abilityDmg, specialMana)
+        newCard = card.makeCard(name, hp, dmg, ability, abilityType, abilityDmg, specialMana)
         data.append(newCard)
         print(data)
 

@@ -1,29 +1,34 @@
-import json
-import random
+player1HP = []
+player2HP = []
 
-test = open("data.json", encoding="utf8")
-data = json.load(test)
+for i in range(length):
+    if player1[0]['name'] in data[i]['name']:
+        player1HP.append(data[i]['hp'])
+for i in range(length):
+    if player1[1]['name'] in data[i]['name']:
+        player1HP.append(data[i]['hp'])
+for i in range(length):
+    if player1[2]['name'] in data[i]['name']:
+        player1HP.append(data[i]['hp'])
+for i in range(length):
+    if player1[3]['name'] in data[i]['name']:
+        player1HP.append(data[i]['hp'])
+for i in range(length):
+    if player1[4]['name'] in data[i]['name']:
+        player1HP.append(data[i]['hp'])
 
-
-player1 = []
-player2 = []
-length = len(data)
-
-
-def player1turn():
-    for i in range(len(player1)):
-        print(player1[i], end ='\n')
-    cardUse = input("State the name of the card you'd like to use: ")
-    special = input("State whether you'd like to use your card's special ability (Y/N): ")
-    cardInteract = (input("State the name of the card you'd like to interact with: "))
-    for i in range(length):
-        print(data[i])
-        if data[i]["name"] == data[i][cardUse]:
-            cardUseID = i
-        if data[i]["name"] == data[i][cardInteract]:
-            cardInteractID = i
-    if special == 'Y':
-        specialAttackDmg = data[i]['special ability damage']
-        print(specialAttackDmg)
-player1turn()
-
+for i in range(length):
+    if player2[0]['name'] in data[i]['name']:
+        player2HP.append(data[i]['hp'])
+for i in range(length):
+    if player2[1]['name'] in data[i]['name']:
+        player2HP.append(data[i]['hp'])
+for i in range(length):
+    if player2[2]['name'] in data[i]['name']:
+        player2HP.append(data[i]['hp'])
+for i in range(length):
+    if player2[3]['name'] in data[i]['name']:
+        player2HP.append(data[i]['hp'])
+for i in range(length):
+    if player2[4]['name'] in data[i]['name']:
+        player2HP.append(data[i]['hp'])
