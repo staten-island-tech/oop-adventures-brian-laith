@@ -1,3 +1,3 @@
-test = [1]
-del(test[0])
-print(len(test))
+test = [0,1,2]
+del(test[1])
+print(test)

@@ -181,10 +181,10 @@ class playerTurns():
                         deathListNames.append(player2[i]['name'])
                 if deathListNames != []:
                     for i in range(len(deathListNames)):
-                        while nameCounter+1 < len(deathListNames)+1:
+                        while 0 < len(deathListNames):
                             for i in range(len(player2)):
-                                if deathListNames[nameCounter] == player2[i]:
-                                    del(deathListNames[nameCounter])
+                                if deathListNames[0] == player2[i]:
+                                    del(deathListNames[0])
                                     del(player2[i])
                     print(player2)
                 for i in range(len(player2)):
@@ -356,10 +356,10 @@ class playerTurns():
                         deathListNames.append(player1[i]['name'])
                 if deathListNames != []:
                     for i in range(len(deathListNames)):
-                        while nameCounter + 1 < len(deathListNames)+1:
+                        while 0 < len(deathListNames):
                             for i in range(len(player1)):
-                                if deathListNames[nameCounter] == player1[i]:
-                                    del(deathListNames[nameCounter])
+                                if deathListNames[0] == player1[i]:
+                                    del(deathListNames[0])
                                     del(player1[i])
                     print(player1)
                 for i in range(len(player1)):
