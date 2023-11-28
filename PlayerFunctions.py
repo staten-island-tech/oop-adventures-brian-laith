@@ -43,13 +43,13 @@ playerSet = 'no'
 tryAgain = 'test'
 global special
 special = 'test'
-deathListNumbers = []
+deathListNames = []
 specialSet = 'no'
-
+nameCounter = 0
 
 class playerTurns():
     def player1turn(self):
-        deathListNumbers = []
+        deathListNames = []
         specialSet = 'no'
         global player1Mana
         player1Mana += 2
@@ -64,11 +64,14 @@ class playerTurns():
             playerSet = 'no'
             specialSet = 'no'
             manaCheck = "no"
+            interact = "Y"
+            nameCounter = 0
             while specialSet == 'no':
                 tryAgain = 'test'
                 playerSet = 'no'
                 specialSet = 'no'
                 manaCheck = "no"
+                interact = 'Y'
                 cardUse = input("State the name of the card you'd like to use: ")
                 global special
                 special = input("State whether you'd like to use your card's special ability (Y/N): ")
@@ -80,6 +83,7 @@ class playerTurns():
                         if cardUse in player1[i]['name']:
                             useCardListID = i
                     if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal':
+                        interact = "N"
                         while manaCheck == "no":
                             if player1[useCardListID]['special ability cost'] <= player1Mana:
                                 player1Mana -= player1[useCardListID]['special ability cost']
@@ -97,6 +101,7 @@ class playerTurns():
                                 manaCheck = 'yes'
                         break
                     if player1[useCardListID]['ability type'] == 'aoe':
+                        interact = "N"
                         while manaCheck == "no":
                             if player1[useCardListID]['special ability cost'] <= player1Mana:
                                 player1Mana -= player1[useCardListID]['special ability cost']
@@ -118,7 +123,9 @@ class playerTurns():
                         specialSet = 'Y'
                 else:
                     specialSet = 'Y'
-            if specialSet == "no":
+            if special == 'N':
+                specialSet = 'Y'
+            if interact == "Y":
                 cardInteract = input("State the name of the card you'd like to interact with: ")
                 for i in range(length):
                     if cardUse in data[i]['name']:
@@ -171,11 +178,15 @@ class playerTurns():
                 for i in range(len(player2)):
                     if player2[i]['hp'] < 1:
                         print('\n',player2[i]['name'],'has died \n')
-                        deathListNumbers.append(i)
-                if deathListNumbers != []:
-                    for i in range(len(deathListNumbers)):
-                        delete = deathListNumbers[i]
-                        del (player2[delete])
+                        deathListNames.append(player2[i]['name'])
+                if deathListNames != []:
+                    for i in range(len(deathListNames)):
+                        while nameCounter+1 < len(deathListNames)+1:
+                            for i in range(len(player2)):
+                                if deathListNames[nameCounter] == player2[i]:
+                                    del(deathListNames[nameCounter])
+                                    del(player2[i])
+                    print(player2)
                 for i in range(len(player2)):
                         print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
@@ -215,19 +226,22 @@ class playerTurns():
     def player2turn(self):
         global player2Mana
         player2Mana += 2
-        deathListNumbers = []
+        deathListNames = []
         specialSet = 'no'
+        nameCounter = 0
         print("Player 2's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player2)):
             print(player2[i],'\n')
         print("You have",player2Mana,"mana \n")
         playerSet = 'no'
+        interact = "Y"
         while playerSet == 'no':
             tryAgain = 'test'
             playerSet = 'no'
             specialSet = 'no'
             manaCheck = "no"
+            interact = "Y"
             while specialSet == 'no':
                 tryAgain = 'test'
                 playerSet = 'no'
@@ -244,6 +258,7 @@ class playerTurns():
                         if cardUse in player2[i]['name']:
                             useCardListID = i
                     if player2[useCardListID]['ability type'] == 'self heal' or player2[useCardListID]['ability type'] == 'mass heal':
+                        interact = "N"
                         while manaCheck == "no":
                             if player2[useCardListID]['special ability cost'] <= player2Mana:
                                 player2Mana -= player2[useCardListID]['special ability cost']
@@ -261,6 +276,7 @@ class playerTurns():
                                 manaCheck = 'yes'
                         break
                     if player2[useCardListID]['ability type'] == 'aoe':
+                        interact = "N"
                         while manaCheck == "no":
                             if player2[useCardListID]['special ability cost'] <= player2Mana:
                                 player2Mana -= player2[useCardListID]['special ability cost']
@@ -282,7 +298,9 @@ class playerTurns():
                         specialSet = 'Y'
                 else:
                     specialSet = 'Y'
-            if specialSet == "no":
+                if special == 'N':
+                    specialSet = 'Y'
+            if interact == "Y":
                 cardInteract = input("State the name of the card you'd like to interact with: ")
                 for i in range(length):
                     if cardUse in data[i]['name']:
@@ -334,12 +352,16 @@ class playerTurns():
                     player1[i]['hp'] -= player2[useCardListID]['special ability damage']
                 for i in range(len(player1)):
                     if player1[i]['hp'] < 1:
-                        print('\n',player2[i]['name'],'has died \n')
-                        deathListNumbers.append(i)
-                if deathListNumbers != []:
-                    for i in range(len(deathListNumbers)):
-                        delete = deathListNumbers[i]
-                        del (player1[delete])
+                        print('\n',player1[i]['name'],'has died \n')
+                        deathListNames.append(player1[i]['name'])
+                if deathListNames != []:
+                    for i in range(len(deathListNames)):
+                        while nameCounter + 1 < len(deathListNames)+1:
+                            for i in range(len(player1)):
+                                if deathListNames[nameCounter] == player1[i]:
+                                    del(deathListNames[nameCounter])
+                                    del(player1[i])
+                    print(player1)
                 for i in range(len(player1)):
                         print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n')
             else:
