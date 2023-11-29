@@ -181,16 +181,15 @@ class playerTurns():
                         print('\n',player2[i]['name'],'has died \n')
                         deathListNames.append(player2[i]['name'])
                 if deathListNames != []: 
-                    counter1 = 0 
                     while 1 < len(deathListNames)+1: 
-                        counter2 = 0 
-                        while counter2 < len(player2): 
-                            if deathListNames[0] == player2[counter2]: 
-                                del(deathListNames[counter1]) 
-                                del(player2[counter2]) 
+                        counter = 0 
+                        while counter <= len(player2): 
+                            if deathListNames[0] == player2[counter]['name']: 
+                                deathListNames.pop(0) 
+                                player2.pop(counter) 
                             else:  
-                                counter2 += 1
-                            return deathListNames, counter2, player2
+                                counter += 1
+                            return deathListNames, counter, player2
                 for i in range(len(player2)):
                         print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
@@ -362,10 +361,10 @@ class playerTurns():
                 if deathListNames != []:
                     while 1 < len(deathListNames)+1:
                         counter = 0
-                        while counter < len(player1):
-                            if deathListNames[0] == player1[counter]:
-                                del(deathListNames[counter1]) 
-                                del(player1[counter]) 
+                        while counter <= len(player1):
+                            if deathListNames[0] == player1[counter]['name']:
+                                deathListNames.pop(0) 
+                                player1.pop(counter) 
                             else: 
                                 counter += 1 
                             return deathListNames, counter, player1
