@@ -45,8 +45,7 @@ global special
 special = 'test'
 deathListNames = []
 specialSet = 'no'
-counter1 = 0
-counter2 = 0
+counter = 0
 
 class playerTurns():
     def player1turn(self):
@@ -54,6 +53,7 @@ class playerTurns():
         specialSet = 'no'
         global player1Mana
         player1Mana += 2
+        counter = 0
         print("Player 1's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player1)):
@@ -180,17 +180,17 @@ class playerTurns():
                     if player2[i]['hp'] < 1:
                         print('\n',player2[i]['name'],'has died \n')
                         deathListNames.append(player2[i]['name'])
-                if deathListNames != []:
-                    counter1 = 0
-                    while 0 < len(deathListNames):
-                        counter2 = 0
-                        while counter2 < len(player2):
-                            if deathListNames[counter1] == player2[counter2]:
-                                del(deathListNames[counter1])
-                                del(player2[counter2])
-                            else:
+                if deathListNames != []: 
+                    counter1 = 0 
+                    while 1 < len(deathListNames)+1: 
+                        counter2 = 0 
+                        while counter2 < len(player2): 
+                            if deathListNames[0] == player2[counter2]: 
+                                del(deathListNames[counter1]) 
+                                del(player2[counter2]) 
+                            else:  
                                 counter2 += 1
-                        counter1 += 1
+                            return deathListNames, counter2, player2
                 for i in range(len(player2)):
                         print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
@@ -233,6 +233,7 @@ class playerTurns():
         deathListNames = []
         specialSet = 'no'
         nameCounter = 0
+        counter = 0
         print("Player 2's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player2)):
@@ -359,20 +360,19 @@ class playerTurns():
                         print('\n',player1[i]['name'],'has died \n')
                         deathListNames.append(player1[i]['name'])
                 if deathListNames != []:
-                    counter1 = 0
-                    while 0 < len(deathListNames):
-                        counter2 = 0
-                        while counter2 < len(player1):
-                            if deathListNames[counter1] == player1[counter2]:
-                                del(deathListNames[counter1])
-                                del(player1[counter2])
-                            else:
-                                counter2 += 1
-                        counter1 += 1
-                for i in range(len(player1)):
-                        print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n')
-            else:
-                specialAttackDmg = data[cardUseID]['special ability damage']
+                    while 1 < len(deathListNames)+1:
+                        counter = 0
+                        while counter < len(player1):
+                            if deathListNames[0] == player1[counter]:
+                                del(deathListNames[counter1]) 
+                                del(player1[counter]) 
+                            else: 
+                                counter += 1 
+                            return deathListNames, counter, player1
+                for i in range(len(player1)): 
+                        print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n') 
+            else: 
+                specialAttackDmg = data[cardUseID]['special ability damage'] 
                 interactCardHP = player1[interactCardListID]['hp'] - specialAttackDmg
                 player1[interactCardListID]['hp'] = interactCardHP
                 if player1[interactCardListID]['hp'] < 1:
