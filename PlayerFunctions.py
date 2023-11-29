@@ -182,15 +182,15 @@ class playerTurns():
                         deathListNames.append(player2[i]['name'])
                 if deathListNames != []:
                     counter1 = 0
-                        while 0 < len(deathListNames):
-                            counter2 = 2
-                            while counter2 < len(player2):
-                                if deathListNames[counter1] == player2[counter2]:
-                                    del(deathListNames[counter1])
-                                    del(player2[counter2])
-                                else:
-                                    counter2 += 1
-                            counter1 += 1
+                    while 0 < len(deathListNames):
+                        counter2 = 0
+                        while counter2 < len(player2):
+                            if deathListNames[counter1] == player2[counter2]:
+                                del(deathListNames[counter1])
+                                del(player2[counter2])
+                            else:
+                                counter2 += 1
+                        counter1 += 1
                 for i in range(len(player2)):
                         print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
@@ -360,15 +360,15 @@ class playerTurns():
                         deathListNames.append(player1[i]['name'])
                 if deathListNames != []:
                     counter1 = 0
-                        while 0 < len(deathListNames):
-                            counter2 = 2
-                            while counter2 < len(player1):
-                                if deathListNames[counter1] == player1[counter2]:
-                                    del(deathListNames[counter1])
-                                    del(player1[counter2])
-                                else:
-                                    counter2 += 1
-                            counter1 += 1
+                    while 0 < len(deathListNames):
+                        counter2 = 0
+                        while counter2 < len(player1):
+                            if deathListNames[counter1] == player1[counter2]:
+                                del(deathListNames[counter1])
+                                del(player1[counter2])
+                            else:
+                                counter2 += 1
+                        counter1 += 1
                 for i in range(len(player1)):
                         print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n')
             else:
