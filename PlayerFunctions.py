@@ -184,14 +184,17 @@ class playerTurns():
                     while 1 < len(deathListNames)+1: 
                         counter = 0 
                         while counter <= len(player2): 
+                            print('hi')
                             if deathListNames[0] == player2[counter]['name']: 
                                 deathListNames.pop(0) 
-                                player2.pop(counter) 
+                                player2.pop(counter)
+                                return deathListNames, counter, player2 
                             else:  
                                 counter += 1
-                            return deathListNames, counter, player2
+                                return deathListNames, counter, player2
+                    print(deathListNames)
                 for i in range(len(player2)):
-                        print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
+                    print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
                 specialAttackDmg = data[cardUseID]['special ability damage']
                 interactCardHP = player2[interactCardListID]['hp'] - specialAttackDmg
@@ -225,6 +228,7 @@ class playerTurns():
                 global playerCards
                 playerCards = 'Dead'
                 print("Player 1 has won the match!")
+                return playerCards
 
     def player2turn(self):
         global player2Mana
@@ -358,18 +362,23 @@ class playerTurns():
                     if player1[i]['hp'] < 1:
                         print('\n',player1[i]['name'],'has died \n')
                         deathListNames.append(player1[i]['name'])
+                print('1',deathListNames)
                 if deathListNames != []:
+                    print('2',deathListNames)
                     while 1 < len(deathListNames)+1:
+                        print('hi')
                         counter = 0
                         while counter <= len(player1):
                             if deathListNames[0] == player1[counter]['name']:
                                 deathListNames.pop(0) 
                                 player1.pop(counter) 
+                                return deathListNames, counter, player1
                             else: 
                                 counter += 1 
-                            return deathListNames, counter, player1
+                                return deathListNames, counter, player1
+                    print('3',deathListNames)
                 for i in range(len(player1)): 
-                        print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n') 
+                    print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n') 
             else: 
                 specialAttackDmg = data[cardUseID]['special ability damage'] 
                 interactCardHP = player1[interactCardListID]['hp'] - specialAttackDmg
@@ -403,6 +412,7 @@ class playerTurns():
             global playerCards
             playerCards = 'Dead'
             print("Player 2 has won the match!")
+            return playerCards
 
 playerturn = playerTurns()   
 
@@ -414,3 +424,4 @@ while playerCards == 'Alive':
     else:
         playerturn.player2turn()
         playerturn.player1turn()
+    
