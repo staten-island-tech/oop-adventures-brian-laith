@@ -34,7 +34,6 @@ useCardListID = 0
 interactCardListID = 0
 specialAtttackDmg = 0
 firstPlayer = random.randint(1,2)
-global playerCards
 playerCards = 'Alive'
 player1Mana = 0
 player2Mana = 0
@@ -181,18 +180,15 @@ class playerTurns():
                         print('\n',player2[i]['name'],'has died \n')
                         deathListNames.append(player2[i]['name'])
                 if deathListNames != []: 
-                    while 1 < len(deathListNames)+1: 
+                    while 0 < len(deathListNames): 
                         counter = 0 
-                        while counter <= len(player2): 
-                            print('hi')
-                            if deathListNames[0] == player2[counter]['name']: 
-                                deathListNames.pop(0) 
-                                player2.pop(counter)
-                                return deathListNames, counter, player2 
-                            else:  
-                                counter += 1
-                                return deathListNames, counter, player2
-                    print(deathListNames)
+                        for i in range(len(player2)):
+                            if deathListNames != []:
+                                if deathListNames[0] == player2[counter]['name']: 
+                                    deathListNames.pop(0) 
+                                    player2.pop(counter)
+                                else:  
+                                    counter += 1
                 for i in range(len(player2)):
                     print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
@@ -224,11 +220,10 @@ class playerTurns():
                     print(player2[i],'\n')
             else:
                 print('\n',player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
-            if player2 == []:
-                global playerCards
-                playerCards = 'Dead'
-                print("Player 1 has won the match!")
-                return playerCards
+        if player2 == []:
+            playerCards = 'Dead'
+            print("Player 1 has won the match!")
+            return playerCards
 
     def player2turn(self):
         global player2Mana
@@ -362,21 +357,16 @@ class playerTurns():
                     if player1[i]['hp'] < 1:
                         print('\n',player1[i]['name'],'has died \n')
                         deathListNames.append(player1[i]['name'])
-                print('1',deathListNames)
                 if deathListNames != []:
-                    print('2',deathListNames)
-                    while 1 < len(deathListNames)+1:
-                        print('hi')
+                    while 0 < len(deathListNames):
                         counter = 0
-                        while counter <= len(player1):
-                            if deathListNames[0] == player1[counter]['name']:
-                                deathListNames.pop(0) 
-                                player1.pop(counter) 
-                                return deathListNames, counter, player1
-                            else: 
-                                counter += 1 
-                                return deathListNames, counter, player1
-                    print('3',deathListNames)
+                        for i in range(len(player1)):
+                            if deathListNames != []:
+                                if deathListNames[0] == player1[counter]['name']:
+                                    deathListNames.pop(0) 
+                                    player1.pop(counter) 
+                                else: 
+                                    counter += 1 
                 for i in range(len(player1)): 
                     print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n') 
             else: 
@@ -409,7 +399,6 @@ class playerTurns():
             else:
                 print('\n',player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
         if player1 == []:
-            global playerCards
             playerCards = 'Dead'
             print("Player 2 has won the match!")
             return playerCards
@@ -417,11 +406,17 @@ class playerTurns():
 playerturn = playerTurns()   
 
 
-while playerCards == 'Alive':
+while True:
+    if playerCards =='Dead':
+        break
     if firstPlayer == 1:
         playerturn.player1turn()
+        if playerCards =='Dead':
+            break
         playerturn.player2turn()
     else:
         playerturn.player2turn()
+        if playerCards =='Dead':
+            break
         playerturn.player1turn()
     
