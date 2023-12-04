@@ -34,6 +34,7 @@ useCardListID = 0
 interactCardListID = 0
 specialAtttackDmg = 0
 firstPlayer = random.randint(1,2)
+global playerCards
 playerCards = 'Alive'
 player1Mana = 0
 player2Mana = 0
@@ -45,6 +46,9 @@ special = 'test'
 deathListNames = []
 specialSet = 'no'
 counter = 0
+typo1 = 'Yes'
+typo2 = 'Yes'
+typo3 = 'Yes'
 
 class playerTurns():
     def player1turn(self):
@@ -72,90 +76,107 @@ class playerTurns():
                 specialSet = 'no'
                 manaCheck = "no"
                 interact = 'Y'
+                typo1 = 'Yes'
+                typo2 = 'Yes'
+                typo3 = 'Yes'
                 cardUse = input("State the name of the card you'd like to use: ")
                 global special
                 special = input("State whether you'd like to use your card's special ability (Y/N): ")
-                if special == 'Y':
+                for i in range(len(player1)):
+                    if cardUse in player1[i]['name']:
+                        typo1 = 'No'
+                    if special == 'Y' or special == 'N':
+                        typo2 = 'No'
+                if typo1 == "Yes" or typo2 == 'Yes':
+                    print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
+                if typo1 == 'No' and typo2 == 'No':
+                    if special == 'Y':
+                        for i in range(length):
+                            if cardUse in data[i]['name']:
+                                cardUseID = i
+                        for i in range(len(player1)):
+                            if cardUse in player1[i]['name']:
+                                useCardListID = i
+                        if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal':
+                            interact = "N"
+                            while manaCheck == "no":
+                                if player1[useCardListID]['special ability cost'] <= player1Mana:
+                                    player1Mana -= player1[useCardListID]['special ability cost']
+                                    manaCheck = 'yes'
+                                    specialSet = 'Y'
+                                    playerSet = 'Y'
+                                else:
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                if tryAgain == 'N':
+                                    special = 'N'
+                                    manaCheck = 'yes'
+                                    specialSet = 'Y'
+                                    playerSet = 'Y'
+                                else:
+                                    manaCheck = 'yes'
+                            break
+                        if player1[useCardListID]['ability type'] == 'aoe':
+                            interact = "N"
+                            while manaCheck == "no":
+                                if player1[useCardListID]['special ability cost'] <= player1Mana:
+                                    player1Mana -= player1[useCardListID]['special ability cost']
+                                    manaCheck = 'yes'
+                                    specialSet = 'Y'
+                                    playerSet = 'Y'
+                                else:
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                    if tryAgain == 'N':
+                                        special = 'N'
+                                        manaCheck = 'yes'
+                                        specialSet = 'Y'
+                                        playerSet = 'Y'
+                                    elif tryAgain == 'Y':
+                                        manaCheck = 'yes'
+                            if specialSet == 'Y':
+                                break
+                        if player1[useCardListID]['ability type'] == 'attack' or player1[useCardListID]['ability type'] == 'single heal':
+                            specialSet = 'Y'
+                    else:
+                        specialSet = 'Y'
+            if special == 'N':
+                specialSet = 'Y'
+            if interact == "Y":
+                cardInteract = input("State the name of the card you'd like to interact with: ")
+                for i in range(len(player2)):
+                    if cardInteract in player2[i]['name']:
+                        typo3 = 'No'
+                if typo3 == "Yes":
+                    print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
+                if typo3 == 'No':
                     for i in range(length):
                         if cardUse in data[i]['name']:
                             cardUseID = i
+                        if cardUse in data[i]['name']:
+                            cardAttackID = i
+                    global interactCardListID
                     for i in range(len(player1)):
                         if cardUse in player1[i]['name']:
-                            useCardListID = i
-                    if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal':
-                        interact = "N"
-                        while manaCheck == "no":
+                                useCardListID = i
+                    for i in range(len(player2)):
+                        if cardInteract in player2[i]['name']:
+                            interactCardListID = i
+                    while manaCheck == "no":
+                        if special == 'Y':
                             if player1[useCardListID]['special ability cost'] <= player1Mana:
                                 player1Mana -= player1[useCardListID]['special ability cost']
                                 manaCheck = 'yes'
-                                specialSet = 'Y'
                                 playerSet = 'Y'
                             else:
                                 tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
                             if tryAgain == 'N':
                                 special = 'N'
                                 manaCheck = 'yes'
-                                specialSet = 'Y'
                                 playerSet = 'Y'
                             else:
                                 manaCheck = 'yes'
-                        break
-                    if player1[useCardListID]['ability type'] == 'aoe':
-                        interact = "N"
-                        while manaCheck == "no":
-                            if player1[useCardListID]['special ability cost'] <= player1Mana:
-                                player1Mana -= player1[useCardListID]['special ability cost']
-                                manaCheck = 'yes'
-                                specialSet = 'Y'
-                                playerSet = 'Y'
-                            else:
-                                tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
-                                if tryAgain == 'N':
-                                    special = 'N'
-                                    manaCheck = 'yes'
-                                    specialSet = 'Y'
-                                    playerSet = 'Y'
-                                elif tryAgain == 'Y':
-                                    manaCheck = 'yes'
-                        if specialSet == 'Y':
-                            break
-                    if player1[useCardListID]['ability type'] == 'attack' or player1[useCardListID]['ability type'] == 'single heal':
-                        specialSet = 'Y'
-                else:
-                    specialSet = 'Y'
-            if special == 'N':
-                specialSet = 'Y'
-            if interact == "Y":
-                cardInteract = input("State the name of the card you'd like to interact with: ")
-                for i in range(length):
-                    if cardUse in data[i]['name']:
-                        cardUseID = i
-                    if cardUse in data[i]['name']:
-                        cardAttackID = i
-                global interactCardListID
-                for i in range(len(player1)):
-                    if cardUse in player1[i]['name']:
-                            useCardListID = i
-                for i in range(len(player2)):
-                    if cardInteract in player2[i]['name']:
-                        interactCardListID = i
-                while manaCheck == "no":
-                    if special == 'Y':
-                        if player1[useCardListID]['special ability cost'] <= player1Mana:
-                            player1Mana -= player1[useCardListID]['special ability cost']
-                            manaCheck = 'yes'
-                            playerSet = 'Y'
-                        else:
-                            tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
-                        if tryAgain == 'N':
-                            special = 'N'
-                            manaCheck = 'yes'
-                            playerSet = 'Y'
                         else:
                             manaCheck = 'yes'
-                    else:
-                        manaCheck = 'yes'
-                        playerSet = 'Y'
+                            playerSet = 'Y'
 
         if special == 'Y':
             if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal':
@@ -221,6 +242,7 @@ class playerTurns():
             else:
                 print('\n',player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
         if player2 == []:
+            global playerCards
             playerCards = 'Dead'
             print("Player 1 has won the match!")
             return playerCards
@@ -232,6 +254,7 @@ class playerTurns():
         specialSet = 'no'
         nameCounter = 0
         counter = 0
+        typo = 'Yes'
         print("Player 2's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player2)):
@@ -250,90 +273,107 @@ class playerTurns():
                 playerSet = 'no'
                 specialSet = 'no'
                 manaCheck = "no"
+                typo1 = 'Yes'
+                typo2 = 'Yes'
+                typo3 = 'Yes'
                 cardUse = input("State the name of the card you'd like to use: ")
                 global special
                 special = input("State whether you'd like to use your card's special ability (Y/N): ")
-                if special == 'Y':
+                for i in range(len(player2)):
+                    if cardUse in player2[i]['name']:
+                        typo1 = 'No'
+                    if special == 'Y' or special == 'N':
+                        typo2 = 'No'
+                if typo1 == "Yes" or typo2 == 'Yes':
+                    print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
+                if typo1 == 'No' and typo2 == 'No':
+                    if special == 'Y':
+                        for i in range(length):
+                            if cardUse in data[i]['name']:
+                                cardUseID = i
+                        for i in range(len(player2)):
+                            if cardUse in player2[i]['name']:
+                                useCardListID = i
+                        if player2[useCardListID]['ability type'] == 'self heal' or player2[useCardListID]['ability type'] == 'mass heal':
+                            interact = "N"
+                            while manaCheck == "no":
+                                if player2[useCardListID]['special ability cost'] <= player2Mana:
+                                    player2Mana -= player2[useCardListID]['special ability cost']
+                                    manaCheck = 'yes'
+                                    specialSet = 'Y'
+                                    playerSet = 'Y'
+                                else:
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                if tryAgain == 'N':
+                                    special = 'N'
+                                    manaCheck = 'yes'
+                                    specialSet = 'Y'
+                                    playerSet = 'Y'
+                                else:
+                                    manaCheck = 'yes'
+                            break
+                        if player2[useCardListID]['ability type'] == 'aoe':
+                            interact = "N"
+                            while manaCheck == "no":
+                                if player2[useCardListID]['special ability cost'] <= player2Mana:
+                                    player2Mana -= player2[useCardListID]['special ability cost']
+                                    manaCheck = 'yes'
+                                    specialSet = 'Y'
+                                    playerSet = 'Y'
+                                else:
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                    if tryAgain == 'N':
+                                        special = 'N'
+                                        manaCheck = 'yes'
+                                        specialSet = 'Y'
+                                        playerSet = 'Y'
+                                    elif tryAgain == 'Y':
+                                        manaCheck = 'yes'
+                            if specialSet == 'Y':
+                                break
+                        if player2[useCardListID]['ability type'] == 'attack' or player2[useCardListID]['ability type'] == 'single heal':
+                            specialSet = 'Y'
+                    else:
+                        specialSet = 'Y'
+                    if special == 'N':
+                        specialSet = 'Y'
+            if interact == "Y":
+                cardInteract = input("State the name of the card you'd like to interact with: ")
+                for i in range(len(player1)):
+                    if cardInteract in player1[i]['name']:
+                        typo3 = 'No'
+                if typo3 == "Yes":
+                    print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
+                if typo3 == 'No':
                     for i in range(length):
                         if cardUse in data[i]['name']:
                             cardUseID = i
+                        if cardUse in data[i]['name']:
+                            cardAttackID = i
+                    global interactCardListID
                     for i in range(len(player2)):
                         if cardUse in player2[i]['name']:
                             useCardListID = i
-                    if player2[useCardListID]['ability type'] == 'self heal' or player2[useCardListID]['ability type'] == 'mass heal':
-                        interact = "N"
-                        while manaCheck == "no":
+                    for i in range(len(player1)):
+                        if cardInteract in player1[i]['name']:
+                            interactCardListID = i
+                    while manaCheck == "no":
+                        if special == 'Y':
                             if player2[useCardListID]['special ability cost'] <= player2Mana:
                                 player2Mana -= player2[useCardListID]['special ability cost']
                                 manaCheck = 'yes'
-                                specialSet = 'Y'
                                 playerSet = 'Y'
                             else:
                                 tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
                             if tryAgain == 'N':
                                 special = 'N'
                                 manaCheck = 'yes'
-                                specialSet = 'Y'
                                 playerSet = 'Y'
                             else:
                                 manaCheck = 'yes'
-                        break
-                    if player2[useCardListID]['ability type'] == 'aoe':
-                        interact = "N"
-                        while manaCheck == "no":
-                            if player2[useCardListID]['special ability cost'] <= player2Mana:
-                                player2Mana -= player2[useCardListID]['special ability cost']
-                                manaCheck = 'yes'
-                                specialSet = 'Y'
-                                playerSet = 'Y'
-                            else:
-                                tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
-                                if tryAgain == 'N':
-                                    special = 'N'
-                                    manaCheck = 'yes'
-                                    specialSet = 'Y'
-                                    playerSet = 'Y'
-                                elif tryAgain == 'Y':
-                                    manaCheck = 'yes'
-                        if specialSet == 'Y':
-                            break
-                    if player2[useCardListID]['ability type'] == 'attack' or player2[useCardListID]['ability type'] == 'single heal':
-                        specialSet = 'Y'
-                else:
-                    specialSet = 'Y'
-                if special == 'N':
-                    specialSet = 'Y'
-            if interact == "Y":
-                cardInteract = input("State the name of the card you'd like to interact with: ")
-                for i in range(length):
-                    if cardUse in data[i]['name']:
-                        cardUseID = i
-                    if cardUse in data[i]['name']:
-                        cardAttackID = i
-                global interactCardListID
-                for i in range(len(player2)):
-                    if cardUse in player2[i]['name']:
-                        useCardListID = i
-                for i in range(len(player1)):
-                    if cardInteract in player1[i]['name']:
-                        interactCardListID = i
-                while manaCheck == "no":
-                    if special == 'Y':
-                        if player2[useCardListID]['special ability cost'] <= player2Mana:
-                            player2Mana -= player2[useCardListID]['special ability cost']
-                            manaCheck = 'yes'
-                            playerSet = 'Y'
-                        else:
-                            tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
-                        if tryAgain == 'N':
-                            special = 'N'
-                            manaCheck = 'yes'
-                            playerSet = 'Y'
                         else:
                             manaCheck = 'yes'
-                    else:
-                        manaCheck = 'yes'
-                        playerSet = 'Y'
+                            playerSet = 'Y'
 
         if special == 'Y':
             if player2[useCardListID]['ability type'] == 'self heal' or player2[useCardListID]['ability type'] == 'mass heal':
@@ -382,12 +422,15 @@ class playerTurns():
                 else:
                     print(player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp')
         else:
+            #normal attack
             for i in range(length):
                 if cardUse in data[i]['name']:
                     cardUseID = i
+            #set and use damage
             normalAttackDmg = data[cardUseID]['damage']
             interactCardHP = player1[interactCardListID]['hp'] - normalAttackDmg
             player1[interactCardListID]['hp'] = interactCardHP
+            #death function
             if player1[interactCardListID]['hp'] < 1:
                 print('\n',player1[interactCardListID]['name'],'has died \n')
                 del (player1[interactCardListID])
@@ -397,18 +440,18 @@ class playerTurns():
                 for i in range(len(player1)):
                     print(player1[i],'\n')
             else:
+                #print hp function
                 print('\n',player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
         if player1 == []:
+            global playerCards
             playerCards = 'Dead'
             print("Player 2 has won the match!")
-            return playerCards
+         
 
 playerturn = playerTurns()   
 
 
-while True:
-    if playerCards =='Dead':
-        break
+while playerCards == 'Alive':
     if firstPlayer == 1:
         playerturn.player1turn()
         if playerCards =='Dead':
