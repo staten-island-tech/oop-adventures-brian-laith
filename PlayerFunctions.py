@@ -9,7 +9,7 @@ player1 = []
 player2 = []
 length = len(data)
 
-
+#player deck funtion
 rand1 = random.sample(range(length-1), 5)
 rand2 = random.sample(range(length-1), 5)
 for i in range(5):
@@ -26,9 +26,8 @@ print("\nPlayer 2's cards:\n")
 for i in range(5):
     print(player2[i],'\n')
 
-
+#define variables
 cardUseID = 0
-cardAttackID = 0
 newCardListID = 0
 useCardListID = 0
 interactCardListID = 0
@@ -50,6 +49,7 @@ typo1 = 'Yes'
 typo2 = 'Yes'
 typo3 = 'Yes'
 
+
 class playerTurns():
     def player1turn(self):
         deathListNames = []
@@ -69,7 +69,6 @@ class playerTurns():
             specialSet = 'no'
             manaCheck = "no"
             interact = "Y"
-            nameCounter = 0
             while specialSet == 'no':
                 tryAgain = 'test'
                 playerSet = 'no'
@@ -151,8 +150,6 @@ class playerTurns():
                     for i in range(length):
                         if cardUse in data[i]['name']:
                             cardUseID = i
-                        if cardUse in data[i]['name']:
-                            cardAttackID = i
                     global interactCardListID
                     for i in range(len(player1)):
                         if cardUse in player1[i]['name']:
@@ -177,7 +174,6 @@ class playerTurns():
                         else:
                             manaCheck = 'yes'
                             playerSet = 'Y'
-
         if special == 'Y':
             if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal':
                 if player1[useCardListID]['ability type'] == 'self heal':
@@ -252,9 +248,7 @@ class playerTurns():
         player2Mana += 2
         deathListNames = []
         specialSet = 'no'
-        nameCounter = 0
         counter = 0
-        typo = 'Yes'
         print("Player 2's turn!\n")
         print("\nYour cards:\n")
         for i in range(len(player2)):
@@ -348,8 +342,6 @@ class playerTurns():
                     for i in range(length):
                         if cardUse in data[i]['name']:
                             cardUseID = i
-                        if cardUse in data[i]['name']:
-                            cardAttackID = i
                     global interactCardListID
                     for i in range(len(player2)):
                         if cardUse in player2[i]['name']:

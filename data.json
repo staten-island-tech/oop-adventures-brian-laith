@@ -45,69 +45,6 @@
         "special ability cost": 2
     },
     {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
-        "name": "Bomber",
-        "hp": 30,
-        "damage": 50,
-        "special ability": "Bombs Away",
-        "ability type": "aoe",
-        "special ability damage": 50,
-        "special ability cost": 2
-    },
-    {
         "name": "Hunter",
         "hp": 80,
         "damage": 40,
