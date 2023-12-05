@@ -140,10 +140,18 @@ class playerTurns():
             if special == 'N':
                 specialSet = 'Y'
             if interact == "Y":
+                for i in range(length):
+                            if cardUse in data[i]['name']:
+                                cardUseID = i
                 cardInteract = input("State the name of the card you'd like to interact with: ")
-                for i in range(len(player2)):
-                    if cardInteract in player2[i]['name']:
-                        typo3 = 'No'
+                if data[cardUseID]['ability type'] == 'single heal':
+                    for i in range(len(player1)):
+                        if cardInteract in player1[i]['name']:
+                            typo3 = 'No'
+                else:
+                    for i in range(len(player2)):
+                        if cardInteract in player2[i]['name']:
+                            typo3 = 'No'
                 if typo3 == "Yes":
                     print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
                 if typo3 == 'No':
@@ -332,10 +340,18 @@ class playerTurns():
                     if special == 'N':
                         specialSet = 'Y'
             if interact == "Y":
+                for i in range(length):
+                    if cardUse in data[i]['name']:
+                        cardUseID = i
                 cardInteract = input("State the name of the card you'd like to interact with: ")
-                for i in range(len(player1)):
-                    if cardInteract in player1[i]['name']:
-                        typo3 = 'No'
+                if data[cardUseID]['ability type'] == 'single heal':
+                    for i in range(len(player2)):
+                        if cardInteract in player2[i]['name']:
+                            typo3 = 'No'
+                else:
+                    for i in range(len(player1)):
+                        if cardInteract in player1[i]['name']:
+                            typo3 = 'No'
                 if typo3 == "Yes":
                     print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
                 if typo3 == 'No':
