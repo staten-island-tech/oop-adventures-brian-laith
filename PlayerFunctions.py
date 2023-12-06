@@ -78,9 +78,9 @@ class playerTurns():
                 typo1 = 'Yes'
                 typo2 = 'Yes'
                 typo3 = 'Yes'
-                cardUse = input("State the name of the card you'd like to use: ")
+                cardUse = input("State the name of the card you'd like to use: ").title()
                 global special
-                special = input("State whether you'd like to use your card's special ability (Y/N): ")
+                special = input("State whether you'd like to use your card's special ability (Y/N): ").upper()
                 for i in range(len(player1)):
                     if cardUse in player1[i]['name']:
                         typo1 = 'No'
@@ -105,7 +105,7 @@ class playerTurns():
                                     specialSet = 'Y'
                                     playerSet = 'Y'
                                 else:
-                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
                                 if tryAgain == 'N':
                                     special = 'N'
                                     manaCheck = 'yes'
@@ -123,7 +123,7 @@ class playerTurns():
                                     specialSet = 'Y'
                                     playerSet = 'Y'
                                 else:
-                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
                                     if tryAgain == 'N':
                                         special = 'N'
                                         manaCheck = 'yes'
@@ -143,8 +143,8 @@ class playerTurns():
                 for i in range(length):
                             if cardUse in data[i]['name']:
                                 cardUseID = i
-                cardInteract = input("State the name of the card you'd like to interact with: ")
-                if data[cardUseID]['ability type'] == 'single heal':
+                cardInteract = input("State the name of the card you'd like to interact with: ").title()
+                if data[cardUseID]['ability type'] == 'single heal' and special == 'Y':
                     for i in range(len(player1)):
                         if cardInteract in player1[i]['name']:
                             typo3 = 'No'
@@ -172,7 +172,7 @@ class playerTurns():
                                 manaCheck = 'yes'
                                 playerSet = 'Y'
                             else:
-                                tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
                             if tryAgain == 'N':
                                 special = 'N'
                                 manaCheck = 'yes'
@@ -223,9 +223,6 @@ class playerTurns():
                 if player2[interactCardListID]['hp'] < 1:
                     print('\n',player2[interactCardListID]['name'],'has died \n')
                     del (player2[interactCardListID])
-                    print("player 2's cards are now:\n")
-                    for i in range(len(player2)):
-                        print(player2[i],'\n')
                 else:
                     print(player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp')
         else:
@@ -238,11 +235,6 @@ class playerTurns():
             if player2[interactCardListID]['hp'] < 1:
                 print('\n',player2[interactCardListID]['name'],'has died \n')
                 del (player2[interactCardListID])
-                print("player 2's cards are now:\n")
-                if player1 == []:
-                    print("All dead")
-                for i in range(len(player2)):
-                    print(player2[i],'\n')
             else:
                 print('\n',player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
         if player2 == []:
@@ -278,9 +270,9 @@ class playerTurns():
                 typo1 = 'Yes'
                 typo2 = 'Yes'
                 typo3 = 'Yes'
-                cardUse = input("State the name of the card you'd like to use: ")
+                cardUse = input("State the name of the card you'd like to use: ").title()
                 global special
-                special = input("State whether you'd like to use your card's special ability (Y/N): ")
+                special = input("State whether you'd like to use your card's special ability (Y/N): ").upper()
                 for i in range(len(player2)):
                     if cardUse in player2[i]['name']:
                         typo1 = 'No'
@@ -305,7 +297,7 @@ class playerTurns():
                                     specialSet = 'Y'
                                     playerSet = 'Y'
                                 else:
-                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
                                 if tryAgain == 'N':
                                     special = 'N'
                                     manaCheck = 'yes'
@@ -323,7 +315,7 @@ class playerTurns():
                                     specialSet = 'Y'
                                     playerSet = 'Y'
                                 else:
-                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
                                     if tryAgain == 'N':
                                         special = 'N'
                                         manaCheck = 'yes'
@@ -343,8 +335,8 @@ class playerTurns():
                 for i in range(length):
                     if cardUse in data[i]['name']:
                         cardUseID = i
-                cardInteract = input("State the name of the card you'd like to interact with: ")
-                if data[cardUseID]['ability type'] == 'single heal':
+                cardInteract = input("State the name of the card you'd like to interact with: ").title()
+                if data[cardUseID]['ability type'] == 'single heal' and special == 'Y':
                     for i in range(len(player2)):
                         if cardInteract in player2[i]['name']:
                             typo3 = 'No'
@@ -372,7 +364,7 @@ class playerTurns():
                                 manaCheck = 'yes'
                                 playerSet = 'Y'
                             else:
-                                tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ")
+                                tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
                             if tryAgain == 'N':
                                 special = 'N'
                                 manaCheck = 'yes'
@@ -424,9 +416,6 @@ class playerTurns():
                 if player1[interactCardListID]['hp'] < 1:
                     print('\n',player1[interactCardListID]['name'],'has died \n')
                     del (player1[interactCardListID])
-                    print("player 1's cards are now:\n")
-                    for i in range(len(player1)):
-                        print(player1[i],'\n')
                 else:
                     print(player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp')
         else:
@@ -442,11 +431,6 @@ class playerTurns():
             if player1[interactCardListID]['hp'] < 1:
                 print('\n',player1[interactCardListID]['name'],'has died \n')
                 del (player1[interactCardListID])
-                print("player 1's cards are now:\n")
-                if player1 == []:
-                    print("All dead")
-                for i in range(len(player1)):
-                    print(player1[i],'\n')
             else:
                 #print hp function
                 print('\n',player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
