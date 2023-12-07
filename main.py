@@ -48,7 +48,9 @@ counter = 0
 typo1 = 'Yes'
 typo2 = 'Yes'
 typo3 = 'Yes'
-
+global activePlayer
+activePlayer = player1
+otherPlayer = player2
 
 class playerTurns():
     def player1turn(self):
@@ -445,13 +447,21 @@ playerturn = playerTurns()
 
 while playerCards == 'Alive':
     if firstPlayer == 1:
+        activePlayer = player1
+        otherPlayer = player2
         playerturn.player1turn()
         if playerCards =='Dead':
             break
+        activePlayer = player2
+        otherPlayer = player1
         playerturn.player2turn()
     else:
+        activePlayer = player2
+        otherPlayer = player1
         playerturn.player2turn()
         if playerCards =='Dead':
             break
+        activePlayer = player1
+        otherPlayer = player2
         playerturn.player1turn()
     
