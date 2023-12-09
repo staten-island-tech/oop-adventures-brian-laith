@@ -1,10 +1,11 @@
+remaining_cards1 = 5
+remaining_cards2 = 5
+
 class Game():
     @classmethod
     def __init__(self):
         import random
         import json
-        remaining_cards1 = 5
-        remaining_cards2 = 5
         test = open("data.json", encoding="utf8")
         data = json.load(test)
         player1cards = []
@@ -94,5 +95,8 @@ class Game():
                         print("No results found\nTry again")
                     else:
                         good = 1
-            attacked_card[0]['hp'] = attacked_card[0]['hp']-self.used_card[0]['special ability damage']
-            print(attacked_card[0]['hp'])
+            if self.playerturn == 0:
+                self.player2cards.remove( ", ".join( repr(e) for e in attacked_card))
+                attacked_card[0]['hp'] = attacked_card[0]['hp']-self.used_card[0]['special ability damage']
+                self.player2cards.extend([attacked_card])
+                print(self.player2cards)
