@@ -1,4 +1,4 @@
-from functions import Game, remaining_cards1, remaining_cards2
+from functions import Game
 import json
 test = open("data.json", encoding="utf8")
 data = json.load(test)

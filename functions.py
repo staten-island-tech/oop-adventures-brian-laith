@@ -1,5 +1,7 @@
 remaining_cards1 = 5
 remaining_cards2 = 5
+mana1 = 2
+mana2 = 2
 
 class Game():
     @classmethod
@@ -38,11 +40,12 @@ class Game():
         self.remaining_cards2 = remaining_cards2
     @classmethod
     def choosecard(self):
-        cardlistid = 0
+        cardlistid1 = 0
+        cardlistid2 = 0
         if self.playerturn == 0:
             used_card = []
             good = 0
-            print("Your cards are: \n")
+            print("\nYour cards are: \n")
             for i in range(self.remaining_cards1):
                 print(self.player1cards[i],"\n")
             #typo check
@@ -51,7 +54,7 @@ class Game():
                 for i in range(self.remaining_cards1):
                     if use in self.player1cards[i]['name']:
                         used_card.extend([self.player1cards[i]])
-                        cardlistid = i
+                        cardlistid1 = i
                 if not used_card:
                     print("No results found\nTry again")
                 else:
@@ -60,7 +63,7 @@ class Game():
         if self.playerturn == 1:
             used_card = []
             good = 0
-            print("Your cards are: \n")
+            print("\nYour cards are: \n")
             for i in range(self.remaining_cards2):
                 print(self.player2cards[i],"\n")
             #typo check
@@ -69,14 +72,17 @@ class Game():
                 for i in range(self.remaining_cards2):
                     if use in self.player2cards[i]['name']:
                         used_card.extend([self.player2cards[i]])
-                        cardlistid = i
+                        cardlistid2 = i
                 if not used_card:
                     print("No results found\nTry again")
                 else:
                     good = 1
         self.used_card = used_card
-        self.cardlistid = cardlistid
+        self.cardlistid1 = cardlistid1
+        self.cardlistid2 = cardlistid2
     def special(self):
+        self.mana1 = mana1
+        self.mana2 = mana2
         if self.used_card[0]['ability type'] == 'attack':
             good = 0
             attacked_card = []
@@ -90,7 +96,7 @@ class Game():
                         print("No results found\nTry again")
                     else:
                         good = 1
-                if self.playerturn == 1:
+                elif self.playerturn == 1:
                     attack_card = input("What card would you like to interact with?: ")
                     for i in range(self.remaining_cards1):
                         if attack_card in self.player1cards[i]['name']:
@@ -100,5 +106,23 @@ class Game():
                     else:
                         good = 1
             if self.playerturn == 0:
-                self.player2cards[self.cardlistid]['hp'] -= self.used_card[0]['special ability damage']
-                print(f"{self.player2cards[self.cardlistid]['name']} is at {self.player2cards[self.cardlistid]['hp']} hp")
+                if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['special ability damage']<= 0:
+                    print(f"{self.player2cards[self.cardlistid2]['name']} has died")
+                    self.remaining_cards2 -= 1
+                else:
+                    self.player2cards[self.cardlistid2]['hp'] -= self.used_card[0]['special ability damage']
+                    print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']} hp")
+            elif self.playerturn == 1:
+                if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['special ability damage']<= 0:
+                    print(f"{self.player1cards[self.cardlistid1]['name']} has died")
+                    self.remaining_cards1 -= 1
+                else:
+                    self.player1cards[self.cardlistid1]['hp'] -= self.used_card[0]['special ability damage']
+                    print(f"{self.player1cards[self.cardlistid1]['name']} is at {self.player1cards[self.cardlistid1]['hp']} hp")
+        if self.used_card[0]['ability type'] == 'self heal':
+            if self.playerturn == 0:
+                self.player1cards[self.cardlistid1]['hp'] += self.used_card[0]['special ability damage']
+                print(f"{self.player1cards[self.cardlistid1]['name']} is at {self.player1cards[self.cardlistid1]['hp']}")
+            elif self.playerturn == 1:
+                self.player2cards[self.cardlistid]['hp'] += self.used_card[0]['special ability damage']
+                print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']}")
