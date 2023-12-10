@@ -38,6 +38,7 @@ class Game():
         self.remaining_cards2 = remaining_cards2
     @classmethod
     def choosecard(self):
+        cardlistid = 0
         if self.playerturn == 0:
             used_card = []
             good = 0
@@ -50,6 +51,7 @@ class Game():
                 for i in range(self.remaining_cards1):
                     if use in self.player1cards[i]['name']:
                         used_card.extend([self.player1cards[i]])
+                        cardlistid = i
                 if not used_card:
                     print("No results found\nTry again")
                 else:
@@ -67,11 +69,13 @@ class Game():
                 for i in range(self.remaining_cards2):
                     if use in self.player2cards[i]['name']:
                         used_card.extend([self.player2cards[i]])
+                        cardlistid = i
                 if not used_card:
                     print("No results found\nTry again")
                 else:
                     good = 1
-            self.used_card = used_card
+        self.used_card = used_card
+        self.cardlistid = cardlistid
     def special(self):
         if self.used_card[0]['ability type'] == 'attack':
             good = 0
@@ -96,7 +100,5 @@ class Game():
                     else:
                         good = 1
             if self.playerturn == 0:
-                self.player2cards.remove( ", ".join( repr(e) for e in attacked_card))
-                attacked_card[0]['hp'] = attacked_card[0]['hp']-self.used_card[0]['special ability damage']
-                self.player2cards.extend([attacked_card])
-                print(self.player2cards)
+                self.player2cards[self.cardlistid]['hp'] -= self.used_card[0]['special ability damage']
+                print(f"{self.player2cards[self.cardlistid]['name']} is at {self.player2cards[self.cardlistid]['hp']} hp")
