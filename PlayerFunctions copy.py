@@ -52,6 +52,7 @@ typo3 = 'Yes'
 
 class playerTurns():
     def player1turn(self):
+        #define variables
         deathListNames = []
         specialSet = 'no'
         global player1Mana
@@ -64,12 +65,14 @@ class playerTurns():
         print("You have",player1Mana,"mana \n")
         playerSet = 'no'
         while playerSet == 'no':
+            #reset variables
             tryAgain = 'test'
             playerSet = 'no'
             specialSet = 'no'
             manaCheck = "no"
             interact = "Y"
             while specialSet == 'no':
+                #reset variables
                 tryAgain = 'test'
                 playerSet = 'no'
                 specialSet = 'no'
@@ -78,9 +81,11 @@ class playerTurns():
                 typo1 = 'Yes'
                 typo2 = 'Yes'
                 typo3 = 'Yes'
+                #use card and ability
                 cardUse = input("State the name of the card you'd like to use: ").title()
                 global special
                 special = input("State whether you'd like to use your card's special ability (Y/N): ").upper()
+                #check for typos
                 for i in range(len(player1)):
                     if cardUse in player1[i]['name']:
                         typo1 = 'No'
@@ -88,15 +93,20 @@ class playerTurns():
                         typo2 = 'No'
                 if typo1 == "Yes" or typo2 == 'Yes':
                     print("Uh oh someoneeeeeee made a typoooooooooo \nPlease try again:\n")
+                #if no typos run this
                 if typo1 == 'No' and typo2 == 'No':
+                    #if they wanna use their special, this will check for individual abilities to see if it needs to select a card or not
                     if special == 'Y':
+                        #this sets the number in the json where the card is
                         for i in range(length):
                             if cardUse in data[i]['name']:
                                 cardUseID = i
+                        #this sets the number in the player list where the card is
                         for i in range(len(player1)):
                             if cardUse in player1[i]['name']:
                                 useCardListID = i
-                        if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal':
+                        #this checks if its ability is one that doesnt need to attack a specific card
+                        if player1[useCardListID]['ability type'] == 'self heal' or player1[useCardListID]['ability type'] == 'mass heal' or player1[useCardListID]['ability type'] == 'aoe':
                             interact = "N"
                             while manaCheck == "no":
                                 if player1[useCardListID]['special ability cost'] <= player1Mana:
@@ -113,26 +123,6 @@ class playerTurns():
                                     playerSet = 'Y'
                                 else:
                                     manaCheck = 'yes'
-                            break
-                        if player1[useCardListID]['ability type'] == 'aoe':
-                            interact = "N"
-                            while manaCheck == "no":
-                                if player1[useCardListID]['special ability cost'] <= player1Mana:
-                                    player1Mana -= player1[useCardListID]['special ability cost']
-                                    manaCheck = 'yes'
-                                    specialSet = 'Y'
-                                    playerSet = 'Y'
-                                else:
-                                    tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
-                                    if tryAgain == 'N':
-                                        special = 'N'
-                                        manaCheck = 'yes'
-                                        specialSet = 'Y'
-                                        playerSet = 'Y'
-                                    elif tryAgain == 'Y':
-                                        manaCheck = 'yes'
-                            if specialSet == 'Y':
-                                break
                         if player1[useCardListID]['ability type'] == 'attack' or player1[useCardListID]['ability type'] == 'single heal':
                             specialSet = 'Y'
                     else:
@@ -440,3 +430,17 @@ class playerTurns():
             print("Player 2 has won the match!")
          
 
+playerturn = playerTurns()   
+
+
+while playerCards == 'Alive':
+    if firstPlayer == 1:
+        playerturn.player1turn()
+        if playerCards =='Dead':
+            break
+        playerturn.player2turn()
+    else:
+        playerturn.player2turn()
+        if playerCards =='Dead':
+            break
+        playerturn.player1turn()
