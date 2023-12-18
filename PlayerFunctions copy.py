@@ -118,7 +118,8 @@ class playerTurns():
                                 else:
                                     #if they want to try again the variables wont be changed causing the "while specialSet == 'no':" loop to run again
                                     tryAgain = input("You cannot use your special because you're broke \nWould you like to try again (Y/N)? ").upper()
-                                #if they dont wanna try again their special gets switched to N so they use their normal attack and the varables are updated so the loops break and they can choose the card they wanna interact with as if they chose not to use their special
+                                #if they dont wanna try again their special gets switched to N so they use their normal attack and the varables are updated 
+                                #so the loops break and they can choose the card they wanna interact with as if they chose not to use their special
                                 if tryAgain == 'N':
                                     special = 'N'
                                     manaCheck = 'yes'
@@ -193,56 +194,81 @@ class playerTurns():
                 #this adds hp to the card itself using its special ability damage (really the amount of hp it heals)
                 player1[useCardListID]['hp'] += player1[useCardListID]['special ability damage']
                 print(player1[useCardListID]['name'],'is at',player1[useCardListID]['hp'],'hp \n')
+            #this is for the mass heal special ability
             elif player1[useCardListID]['ability type'] == 'mass heal':
+                #this adds hp to the player's own deck using the card's special ability damage (really the amount of hp it heals)
                 for i in range(len(player1)):
                     player1[i]['hp'] += player1[useCardListID]['special ability damage']
                     print(player1[i]['name'],'is at',player1[i]['hp'],'hp \n')
+            #this is for the single heal special ability
             elif player1[useCardListID]['ability type'] == 'single heal':
+                #this gets the list number for the card being healed
                 for i in range(len(player1)):
                     if cardInteract in player1[i]['name']:
                         interactCardListID = i
+                #this adds the hp to the cards
                 player1[interactCardListID]['hp'] += player1[useCardListID]['special ability damage']
                 print(player1[interactCardListID]['name'],'is at',player1[interactCardListID]['hp'],'hp \n')
+            #this is for the aoe special ability
             elif player1[useCardListID]['ability type'] == 'aoe':
+                #damage function
                 for i in range(len(player2)):
                     player2[i]['hp'] -= player1[useCardListID]['special ability damage']
+                #death function
                 for i in range(len(player2)):
                     if player2[i]['hp'] < 1:
+                        #print deaths
                         print('\n',player2[i]['name'],'has died \n')
+                        #add the names of the dead cards to a list
                         deathListNames.append(player2[i]['name'])
-                if deathListNames != []: 
-                    while 0 < len(deathListNames): 
+                #dead card removing function
+                if deathListNames != []:
+                    #while cards still havent been removed 
+                    while deathListNames != []: 
                         counter = 0 
                         for i in range(len(player2)):
                             if deathListNames != []:
+                                #this checks if the first card in the dead name list is exual to each card in the player deck
                                 if deathListNames[0] == player2[counter]['name']: 
+                                    #if it is, it deletes that card from both lists
                                     deathListNames.pop(0) 
                                     player2.pop(counter)
                                 else:  
+                                    #if it isnt, it adds one to the counter so it tests the next card
                                     counter += 1
+                #it then prints the hp of the cards alive
                 for i in range(len(player2)):
                     print(player2[i]['name'],'is at',player2[i]['hp'],'hp \n')
             else:
+                #this does the normal attack special
                 specialAttackDmg = data[cardUseID]['special ability damage']
                 interactCardHP = player2[interactCardListID]['hp'] - specialAttackDmg
                 player2[interactCardListID]['hp'] = interactCardHP
+                #this is if the card died
                 if player2[interactCardListID]['hp'] < 1:
                     print('\n',player2[interactCardListID]['name'],'has died \n')
                     del (player2[interactCardListID])
                 else:
+                    #this prints the damaged card's hp
                     print(player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp')
+        #this is just the normal attack
         else:
+            #this finds the spot in the json of the card being used
             for i in range(length):
                 if cardUse in data[i]['name']:
                     cardUseID = i
+            #this sets the damage and changed the hp of the attacked card
             normalAttackDmg = data[cardUseID]['damage']
             interactCardHP = player2[interactCardListID]['hp'] - normalAttackDmg
             player2[interactCardListID]['hp'] = interactCardHP
+            #this is the death function
             if player2[interactCardListID]['hp'] < 1:
                 print('\n',player2[interactCardListID]['name'],'has died \n')
                 del (player2[interactCardListID])
             else:
+                #this will print the hp of the damaged card
                 print('\n',player2[interactCardListID]['name'],'is at',player2[interactCardListID]['hp'],'hp \n')
+        #this checks if the player ran out of cards, ending the game (win function)
         if player2 == []:
             global playerCards
             playerCards = 'Dead'
