@@ -143,9 +143,10 @@ class Game():
             interact_card = input("What card would you like to interact with?: ")
             while good == 0:
                 for i in range(self.remaining_cards1):
-                    if self.remaining_cards1[i]['name'] in interact_card:
-                        attacked_card.extend([self.remaining_cards1[i]['name']])
-                        cardlistid1 = i
+                    if self.player1cards[i]['name'] in interact_card:
+                        attacked_card.extend([self.player1cards[i]['name']])
+                        cardlistid1 += i
+                        self.cardlistid1 = cardlistid1
                         good = 1
                 if not attacked_card:
                     print("No results found.\nTry again")
@@ -159,9 +160,11 @@ class Game():
             interact_card = input("What card would you like to interact with?: ")
             while good == 0:
                 for i in range(self.remaining_cards2):
-                    if self.remaining_cards1[i]['name'] in interact_card:
-                        attacked_card.extend([self.remaining_cards2[i]['name']])
-                        cardlistid2 = i
+                    if self.player2cards[i]['name'] in interact_card:
+                        attacked_card.extend([self.player2cards[i]['name']])
+                        cardlistid2 += i
+                        self.cardlistid2 = cardlistid2
+                        good = 1
                 if not attacked_card:
                     print("No results found.\nTry again")
             self.player2cards[cardlistid2]['hp'] += self.used_card[0]['special ability damage']
@@ -182,18 +185,19 @@ class Game():
                 self.playerturn -= 1
                 self.mana2 += 2
     def aoe(self):
+
+        print(self.remaining_cards1)
+        print(self.remaining_cards2)
+        print(self.player1cards)
+        print(self.player2cards)
         if self.playerturn == 0:
             for i in range(self.remaining_cards2):
                 if self.player2cards[i]['hp'] - self.used_card[0]['special ability damage']<= 0:
                     print(f"{self.player2cards[i]['name']} has died")
                     self.player2cards.remove(self.player2cards[i])
-                    self.mana1 += 2
-                    self.playerturn += 1
                 else:
                     self.player2cards[i]['hp'] -= self.used_card[0]['special ability damage']
-                    print(f"\n{self.player2cards[i]['name']} is at {self.player2cards[i]['hp']}")
-                    self.mana1 += 2
-                    self.playerturn += 1
+                    print(f"\n{self.player2cards[i]['name']} is at {self.player2cards[i]['hp']} hp")
             self.playerturn += 1
             self.mana1 += 2
         if self.playerturn == 1:
@@ -201,13 +205,9 @@ class Game():
                 if self.player1cards[i]['hp'] - self.used_card[0]['special ability damage'] <= 0:
                     print(f"\n{self.player1cards[i]['name']} has died")
                     self.player1cards.remove(self.player1cards[i])
-                    self.mana2 += 2
-                    self.playerturn -= 1
                 else:
                     self.player1cards[i]['hp'] -= self.used_card[0]['special ability damage']
-                    print(f"\n{self.player1cards[i]['name']} is at {self.player1cards[i]['hp']}")
-                    self.mana2 += 2
-                    self.playerturn -= 1
+                    print(f"\n{self.player1cards[i]['name']} is at {self.player1cards[i]['hp']} hp")
             self.playerturn -= 1
             self.mana2 += 2
     def normal_attack(self):
