@@ -185,31 +185,35 @@ class Game():
                 self.playerturn -= 1
                 self.mana2 += 2
     def aoe(self):
-
-        print(self.remaining_cards1)
-        print(self.remaining_cards2)
-        print(self.player1cards)
-        print(self.player2cards)
+        dead = []
         if self.playerturn == 0:
             for i in range(self.remaining_cards2):
                 if self.player2cards[i]['hp'] - self.used_card[0]['special ability damage']<= 0:
-                    print(f"{self.player2cards[i]['name']} has died")
-                    self.player2cards.remove(self.player2cards[i])
+                    print(f"\n{self.player2cards[i]['name']} has died")
+                    dead.extend([self.player2cards[i]])
                 else:
                     self.player2cards[i]['hp'] -= self.used_card[0]['special ability damage']
                     print(f"\n{self.player2cards[i]['name']} is at {self.player2cards[i]['hp']} hp")
-            self.playerturn += 1
+            for i in dead:
+                self.player2cards.remove(i)
+                self.remaining_cards2 -= len(dead)-1
             self.mana1 += 2
-        if self.playerturn == 1:
+        elif self.playerturn == 1:
             for i in range(self.remaining_cards1):
                 if self.player1cards[i]['hp'] - self.used_card[0]['special ability damage'] <= 0:
                     print(f"\n{self.player1cards[i]['name']} has died")
-                    self.player1cards.remove(self.player1cards[i])
+                    dead.extend([self.player1cards[i]])
                 else:
                     self.player1cards[i]['hp'] -= self.used_card[0]['special ability damage']
                     print(f"\n{self.player1cards[i]['name']} is at {self.player1cards[i]['hp']} hp")
-            self.playerturn -= 1
+            for i in dead:
+                self.player1cards.remove(i)
+                self.remaining_cards1 -= len(dead)-1
             self.mana2 += 2
+        if self.playerturn%2 == 0:
+            self.playerturn += 1
+        else:
+            self.playerturn -= 1
     def normal_attack(self):
         good = 0
         attacked_card = []
