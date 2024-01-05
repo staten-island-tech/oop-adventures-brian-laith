@@ -2,16 +2,19 @@ class Game():
     def __init__(self):
         import random
         import json
-        remaining_cards1 = 5
-        remaining_cards2 = 5
-        mana1 = 2
-        mana2 = 2
+        self.remaining_cards1 = 5
+        self.remaining_cards2 = 5
+        self.mana1 = 2
+        self.mana2 = 2
         player1cards = []
         player2cards = []
         test = open("data.json", encoding="utf8")
         data = json.load(test)
         length = len(data)
+
         self.playerturn = random.randint(0,1)
+        print(self.playerturn)
+
         card1 = random.sample(range(length-1), 10)
         card2 = random.sample(range(length-1), 10)
         for i in range(5):
@@ -24,14 +27,13 @@ class Game():
         print("\nPlayer 2's cards:\n")
         for i in range(5):
             print(player2cards[i],'\n')
-        self.remaining_cards1 = remaining_cards1
-        self.remaining_cards2 = remaining_cards2
-        self.mana1 = mana1
-        self.mana2 = mana2
+
         self.length = length
         self.player1cards = player1cards
         self.player2cards = player2cards
+
     def choosecard(self):
+        print(self.playerturn)
         cardlistid1 = 0
         cardlistid2 = 0
         if self.playerturn%2 == 0:
@@ -55,6 +57,7 @@ class Game():
                     good = 1
             self.used_card = used_card
             self.cardlistid1 = cardlistid1
+
         if self.playerturn%2 == 1:
             used_card = []
             good = 0
@@ -77,6 +80,10 @@ class Game():
             self.used_card = used_card
             self.cardlistid1 = cardlistid1
             self.cardlistid2 = cardlistid2
+
+
+
+
     def attack(self):
         good = 0
         attacked_card = []
@@ -190,7 +197,7 @@ class Game():
                     print(f"\n{self.player2cards[i]['name']} is at {self.player2cards[i]['hp']} hp")
             for i in dead:
                 self.player2cards.remove(i)
-                self.remaining_cards2 -= len(dead)-1
+                self.remaining_cards2 -= len(dead)
             self.mana1 += 2
         elif self.playerturn%2 == 1:
             for i in range(self.remaining_cards1):
@@ -202,7 +209,7 @@ class Game():
                     print(f"\n{self.player1cards[i]['name']} is at {self.player1cards[i]['hp']} hp")
             for i in dead:
                 self.player1cards.remove(i)
-                self.remaining_cards1 -= len(dead)-1
+                self.remaining_cards1 -= len(dead)
             self.mana2 += 2
         self.playerturn += 1
     def normal_attack(self):
