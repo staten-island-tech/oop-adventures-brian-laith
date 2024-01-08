@@ -1,60 +1,71 @@
 class Game():
+    # INIT COMPLETLY FINE #
     def __init__(self):
         import random
         import json
+
         self.remaining_cards1 = 5
         self.remaining_cards2 = 5
         self.mana1 = 2
         self.mana2 = 2
+
         player1cards = []
         player2cards = []
+
         test = open("data.json", encoding="utf8")
         data = json.load(test)
         length = len(data)
 
         self.playerturn = random.randint(0,1)
-        print(self.playerturn)
 
         card1 = random.sample(range(length-1), 10)
         card2 = random.sample(range(length-1), 10)
+
         for i in range(5):
             player1cards.extend([data[card1[i]]])
+
         for i in range(5):
             player2cards.extend([data[card2[i]]])
+
         print("\nPlayer 1's cards:\n")
+
         for i in range(5):
             print(player1cards[i],'\n')
+
         print("\nPlayer 2's cards:\n")
+
         for i in range(5):
             print(player2cards[i],'\n')
 
-        self.length = length
         self.player1cards = player1cards
         self.player2cards = player2cards
 
     def choosecard(self):
-        print(self.playerturn)
         cardlistid1 = 0
         cardlistid2 = 0
+
         if self.playerturn%2 == 0:
             used_card = []
             good = 0
             print("Player 1's turn")
             print(f"\nYou have {self.mana1} mana")
             print("\nYour cards are: \n")
+
             for i in range(self.remaining_cards1):
                 print(self.player1cards[i],"\n")
+
             #typo check
             while good != 1:
                 use = input("What card would you like to use?: ")
                 for i in range(self.remaining_cards1):
-                    if use in self.player1cards[i]['name']:
+                    if use.capitalize() in self.player1cards[i]['name']:
                         used_card.extend([self.player1cards[i]])
                         cardlistid1 = i
                 if not used_card:
                     print("No results found\nTry again")
                 else:
                     good = 1
+
             self.used_card = used_card
             self.cardlistid1 = cardlistid1
 
@@ -66,21 +77,27 @@ class Game():
             print("\nYour cards are: \n")
             for i in range(self.remaining_cards2):
                 print(self.player2cards[i],"\n")
+
             #typo check
-            while good != 1:
+            while True:
                 use = input("What card would you like to use?: ")
-                for i in range(self.remaining_cards2):
-                    if use in self.player2cards[i]['name']:
-                        used_card.extend([self.player2cards[i]])
-                        cardlistid2 = i
+
+                for card in self.player2cards:
+                    if use == card['name']:
+                        used_card.extend([card])
+                        cardlistid2 = card
+
                 if not used_card:
                     print("No results found\nTry again")
+
                 else:
-                    good = 1
+                    break
+
             self.used_card = used_card
             self.cardlistid1 = cardlistid1
             self.cardlistid2 = cardlistid2
-
+            print(self.cardlistid1)
+            print(self.cardlistid2)
 
 
 
@@ -106,17 +123,23 @@ class Game():
                     print("No results found\nTry again")
                 else:
                     good = 1
+
         if self.playerturn%2 == 0:
+            print("I hate hhaobin", self.cardlistid2)
+
             if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['special ability damage']<= 0:
                 print(f"{self.player2cards[self.cardlistid2]['name']} has died")
                 self.player2cards.remove(self.player2cards[self.cardlistid2])
                 self.remaining_cards2 -= 1
                 self.mana1 += 2
+
             else:
                 self.player2cards[self.cardlistid2]['hp'] -= self.used_card[0]['special ability damage']
                 print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']} hp")
                 self.mana1 += 2
+
         elif self.playerturn%2 == 1:
+            print("I hate hhaobin", self.cardlistid1)
             if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['special ability damage']<= 0:
                 print(f"{self.player1cards[self.cardlistid1]['name']} has died")
                 self.player1cards.remove(self.player1cards[self.cardlistid1])
@@ -126,7 +149,9 @@ class Game():
                 self.player1cards[self.cardlistid1]['hp'] -= self.used_card[0]['special ability damage']
                 print(f"{self.player1cards[self.cardlistid1]['name']} is at {self.player1cards[self.cardlistid1]['hp']} hp")
                 self.mana2 += 2
+
         self.playerturn += 1
+
     def self_heal(self):
         if self.playerturn%2 == 0:
             self.player1cards[self.cardlistid1]['hp'] += self.used_card[0]['special ability damage']
@@ -212,9 +237,16 @@ class Game():
                 self.remaining_cards1 -= len(dead)
             self.mana2 += 2
         self.playerturn += 1
+
     def normal_attack(self):
         good = 0
         attacked_card = []
+        
+        print(self.player1cards)
+        print(self.player2cards)
+        print("I hate benson", self.cardlistid1)
+        print("I seriously hate benson", self.cardlistid2)
+
         while good != 1:
             if self.playerturn%2 == 0:
                 attack_card = input("What card would you like to interact with?: ")
@@ -235,6 +267,9 @@ class Game():
                 else:
                     good = 1
         if self.playerturn%2 == 0:
+            print("I hate benson", self.cardlistid1)
+            print("I seriously hate benson", self.cardlistid2)
+
             if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['damage']<= 0:
                 print(f"{self.player2cards[self.cardlistid2]['name']} has died")
                 self.player2cards.remove(self.player2cards[self.cardlistid1])
@@ -244,7 +279,11 @@ class Game():
                 self.player2cards[self.cardlistid2]['hp'] -= self.used_card[0]['damage']
                 print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']} hp")
                 self.mana1 += 2
+
         elif self.playerturn%2 == 1:
+            print("I hate benson", self.cardlistid1)
+            print("I seriously hate benson", self.cardlistid2)
+
             if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['damage']<= 0:
                 print(f"{self.player1cards[self.cardlistid1]['name']} has died")
                 self.player1cards.remove(self.player1cards[self.cardlistid2])

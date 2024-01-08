@@ -1,4 +1,5 @@
 from functions import Game
+import time
 import json
 test = open("data.json", encoding="utf8")
 data = json.load(test)
@@ -8,7 +9,11 @@ game = Game()
 remaining_cards1 = game.remaining_cards1
 remaining_cards2 = game.remaining_cards2
 
-while remaining_cards1 != 0 and remaining_cards2 != 0:
+while remaining_cards1 != 0 or remaining_cards2 != 0:
+    print("GRAHHHHHHHHHHHHHHH", game.remaining_cards1)
+    print("GRAHHHHHHHHHHHHHHH", remaining_cards1)
+    time.sleep(5)
+
     mana1 = game.mana1
     mana2 = game.mana2
     playerturn = game.playerturn
