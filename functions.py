@@ -46,7 +46,6 @@ class Game():
 
         if self.playerturn%2 == 0:
             used_card = []
-            good = 0
             print("Player 1's turn")
             print(f"\nYou have {self.mana1} mana")
             print("\nYour cards are: \n")
@@ -55,23 +54,18 @@ class Game():
                 print(self.player1cards[i],"\n")
 
             #typo check
-            while good != 1:
+            while True:
                 use = input("What card would you like to use?: ")
-                for i in range(self.remaining_cards1):
-                    if use.capitalize() in self.player1cards[i]['name']:
-                        used_card.extend([self.player1cards[i]])
-                        cardlistid1 = i
+                for card in self.player1cards:
+                    if use == card['name']:
+                        used_card.extend([card])
+                        cardlistid1 = card
                 if not used_card:
                     print("No results found\nTry again")
                 else:
-                    good = 1
-
-            self.used_card = used_card
-            self.cardlistid1 = cardlistid1
-
+                    break
         if self.playerturn%2 == 1:
             used_card = []
-            good = 0
             print("Player 2's turn")
             print(f"\nYou have {self.mana1} mana")
             print("\nYour cards are: \n")
@@ -96,36 +90,33 @@ class Game():
             self.used_card = used_card
             self.cardlistid1 = cardlistid1
             self.cardlistid2 = cardlistid2
-            print(self.cardlistid1)
-            print(self.cardlistid2)
+
 
 
 
     def attack(self):
-        good = 0
         attacked_card = []
-        while good != 1:
+        while True:
             if self.playerturn%2 == 0:
                 attack_card = input("What card would you like to interact with?: ")
-                for i in range(self.remaining_cards2):
-                    if attack_card in self.player2cards[i]['name']:
-                        attacked_card.extend([self.player2cards[i]])
+                for card in self.player1cards:
+                    if attack_card == card['name']:
+                        attacked_card.extend([card])
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
-                    good = 1
+                    break
             elif self.playerturn%2 == 1:
                 attack_card = input("What card would you like to interact with?: ")
-                for i in range(self.remaining_cards1):
-                    if attack_card in self.player1cards[i]['name']:
-                        attacked_card.extend([self.player1cards[i]])
+                for card in self.player2cards:
+                    if attack_card == card['name']:
+                        attacked_card.extend([card])
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
-                    good = 1
+                    break
 
         if self.playerturn%2 == 0:
-            print("I hate hhaobin", self.cardlistid2)
 
             if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['special ability damage']<= 0:
                 print(f"{self.player2cards[self.cardlistid2]['name']} has died")
@@ -139,7 +130,6 @@ class Game():
                 self.mana1 += 2
 
         elif self.playerturn%2 == 1:
-            print("I hate hhaobin", self.cardlistid1)
             if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['special ability damage']<= 0:
                 print(f"{self.player1cards[self.cardlistid1]['name']} has died")
                 self.player1cards.remove(self.player1cards[self.cardlistid1])
@@ -166,32 +156,30 @@ class Game():
         cardlistid1 = 0
         cardlistid2 = 0
         if self.playerturn%2 == 0:
-            good = 0
             attacked_card = []
             interact_card = input("What card would you like to interact with?: ")
-            while good == 0:
-                for i in range(self.remaining_cards1):
-                    if self.player1cards[i]['name'] in interact_card:
-                        attacked_card.extend([self.player1cards[i]['name']])
-                        cardlistid1 += i
+            while True:
+                for card in self.remaining_cards1:
+                    if self.player1cards[card]['name'] in interact_card:
+                        attacked_card.extend([self.player1cards[card]['name']])
+                        cardlistid1 = card
                         self.cardlistid1 = cardlistid1
-                        good = 1
+                        break
                 if not attacked_card:
                     print("No results found.\nTry again")
             self.player1cards[cardlistid1]['hp'] += self.used_card[0]['special ability damage']
             print(f"{self.player1cards[cardlistid1]['name']} is at {self.player1cards[cardlistid1]['hp']}")
             self.mana1 += 2
         elif self.playerturn%2 == 1:
-            good = 0
             attacked_card = []
             interact_card = input("What card would you like to interact with?: ")
-            while good == 0:
-                for i in range(self.remaining_cards2):
-                    if self.player2cards[i]['name'] in interact_card:
-                        attacked_card.extend([self.player2cards[i]['name']])
-                        cardlistid2 += i
+            while True:
+                for card in self.remaining_cards2:
+                    if self.player2cards[card]['name'] in interact_card:
+                        attacked_card.extend([self.player2cards[card]['name']])
+                        cardlistid2 = card
                         self.cardlistid2 = cardlistid2
-                        good = 1
+                        break
                 if not attacked_card:
                     print("No results found.\nTry again")
             self.player2cards[cardlistid2]['hp'] += self.used_card[0]['special ability damage']
@@ -267,8 +255,7 @@ class Game():
                 else:
                     good = 1
         if self.playerturn%2 == 0:
-            print("I hate benson", self.cardlistid1)
-            print("I seriously hate benson", self.cardlistid2)
+
 
             if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['damage']<= 0:
                 print(f"{self.player2cards[self.cardlistid2]['name']} has died")
@@ -281,8 +268,7 @@ class Game():
                 self.mana1 += 2
 
         elif self.playerturn%2 == 1:
-            print("I hate benson", self.cardlistid1)
-            print("I seriously hate benson", self.cardlistid2)
+
 
             if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['damage']<= 0:
                 print(f"{self.player1cards[self.cardlistid1]['name']} has died")
