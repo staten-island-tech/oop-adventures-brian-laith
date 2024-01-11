@@ -229,11 +229,7 @@ class Game():
     def normal_attack(self):
         good = 0
         attacked_card = []
-        
-        print(self.player1cards)
-        print(self.player2cards)
-        print("I hate benson", self.cardlistid1)
-        print("I seriously hate benson", self.cardlistid2)
+
 
         while good != 1:
             if self.playerturn%2 == 0:
