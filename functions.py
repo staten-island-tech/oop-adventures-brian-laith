@@ -39,6 +39,7 @@ class Game():
 
         self.player1cards = player1cards
         self.player2cards = player2cards
+        self.used_card = None
 
     def choosecard(self):
         cardlistid1 = 0
@@ -99,7 +100,7 @@ class Game():
         while True:
             if self.playerturn%2 == 0:
                 attack_card = input("What card would you like to interact with?: ")
-                for card in self.player1cards:
+                for card in self.player2cards:
                     if attack_card == card['name']:
                         attacked_card.extend([card])
                 if not attacked_card:
@@ -108,7 +109,7 @@ class Game():
                     break
             elif self.playerturn%2 == 1:
                 attack_card = input("What card would you like to interact with?: ")
-                for card in self.player2cards:
+                for card in self.player1cards:
                     if attack_card == card['name']:
                         attacked_card.extend([card])
                 if not attacked_card:
@@ -236,7 +237,7 @@ class Game():
                 attack_card = input("What card would you like to interact with?: ")
                 for i in range(self.remaining_cards2):
                     if attack_card in self.player2cards[i]['name']:
-                        attacked_card.extend([self.player2cards[i]])
+                        attacked_card.extend(self.player2cards[i])
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
@@ -245,7 +246,7 @@ class Game():
                 attack_card = input("What card would you like to interact with?: ")
                 for i in range(self.remaining_cards1):
                     if attack_card in self.player1cards[i]['name']:
-                        attacked_card.extend([self.player1cards[i]])
+                        attacked_card.extend(self.player1cards[i])
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
