@@ -238,6 +238,7 @@ class Game():
                 for i in range(self.remaining_cards2):
                     if attack_card in self.player2cards[i]['name']:
                         attacked_card.extend(self.player2cards[i])
+                        print(i)
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
@@ -247,6 +248,7 @@ class Game():
                 for i in range(self.remaining_cards1):
                     if attack_card in self.player1cards[i]['name']:
                         attacked_card.extend(self.player1cards[i])
+                        print(i)
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
