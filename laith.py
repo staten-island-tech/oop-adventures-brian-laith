@@ -9,7 +9,6 @@ data = json.load(test)
 
 
 
-
 class Game():
     def __init__(self): 
         player1 = []
