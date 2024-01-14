@@ -40,7 +40,7 @@ class Game():
         self.player1cards = player1cards
         self.player2cards = player2cards
         self.used_card = None
-
+    #SHOULD BE FIXED
     def choosecard(self):
         cardlistid1 = 0
         cardlistid2 = 0
@@ -51,16 +51,17 @@ class Game():
             print(f"\nYou have {self.mana1} mana")
             print("\nYour cards are: \n")
 
-            for i in range(self.remaining_cards1):
-                print(self.player1cards[i],"\n")
+            for i in self.player1cards:
+                print(i,"\n")
 
             #typo check
             while True:
                 use = input("What card would you like to use?: ")
+
                 for card in self.player1cards:
-                    if use == card['name']:
+                    if use in card['name']:
                         used_card.extend([card])
-                        cardlistid1 = card
+                        cardlistid1 = self.player1cards.index(card)
                 if not used_card:
                     print("No results found\nTry again")
                 else:
@@ -70,39 +71,36 @@ class Game():
             print("Player 2's turn")
             print(f"\nYou have {self.mana1} mana")
             print("\nYour cards are: \n")
-            for i in range(self.remaining_cards2):
-                print(self.player2cards[i],"\n")
+            for i in self.player2cards:
+                print(i,"\n")
 
             #typo check
             while True:
                 use = input("What card would you like to use?: ")
 
                 for card in self.player2cards:
-                    if use == card['name']:
+                    if use in card['name']:
                         used_card.extend([card])
-                        cardlistid2 = card
-
+                        cardlistid2 = self.player2cards.index(card)
                 if not used_card:
                     print("No results found\nTry again")
-
                 else:
                     break
 
-            self.used_card = used_card
-            self.cardlistid1 = cardlistid1
-            self.cardlistid2 = cardlistid2
-
-
-
-
+        self.used_card = used_card
+        self.cardlistid1 = cardlistid1
+        self.cardlistid2 = cardlistid2
+    #GOOD
     def attack(self):
         attacked_card = []
+        attack_id = 0
         while True:
             if self.playerturn%2 == 0:
                 attack_card = input("What card would you like to interact with?: ")
                 for card in self.player2cards:
                     if attack_card == card['name']:
                         attacked_card.extend([card])
+                        attack_id = self.player2cards.index(card)
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
@@ -112,33 +110,33 @@ class Game():
                 for card in self.player1cards:
                     if attack_card == card['name']:
                         attacked_card.extend([card])
+                        attack_id = self.player1cards.index(card)
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
                     break
-
+        #attack part and health subtraction
         if self.playerturn%2 == 0:
 
-            if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['special ability damage']<= 0:
-                print(f"{self.player2cards[self.cardlistid2]['name']} has died")
-                self.player2cards.remove(self.player2cards[self.cardlistid2])
+            if self.used_card[0]['special ability damage'] >= attacked_card[0]['hp']:
+                print(f"{attacked_card[0]['name']} has died")
+                self.player2cards.remove(attacked_card)
                 self.remaining_cards2 -= 1
                 self.mana1 += 2
-
             else:
-                self.player2cards[self.cardlistid2]['hp'] -= self.used_card[0]['special ability damage']
-                print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']} hp")
+                self.player2cards[attack_id]['hp'] -= self.used_card[0]['special ability damage']
+                print(f"{attacked_card[0]['name']} is at {self.player2cards[attack_id]['hp']} hp")
                 self.mana1 += 2
 
         elif self.playerturn%2 == 1:
-            if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['special ability damage']<= 0:
-                print(f"{self.player1cards[self.cardlistid1]['name']} has died")
-                self.player1cards.remove(self.player1cards[self.cardlistid1])
+            if self.used_card[0]['special ability damage'] >= attacked_card[0]['hp']:
+                print(f"{attacked_card[0]['name']} has died")
+                self.player1cards.remove(attacked_card)
                 self.remaining_cards1 -= 1
                 self.mana2 += 2
             else:
-                self.player1cards[self.cardlistid1]['hp'] -= self.used_card[0]['special ability damage']
-                print(f"{self.player1cards[self.cardlistid1]['name']} is at {self.player1cards[self.cardlistid1]['hp']} hp")
+                self.player1cards[attack_id]['hp'] -= self.used_card[0]['special ability damage']
+                print(f"{attacked_card[0]['name']} is at {self.player1cards[attack_id]['hp']} hp")
                 self.mana2 += 2
 
         self.playerturn += 1
