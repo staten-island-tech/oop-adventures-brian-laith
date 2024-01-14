@@ -18,8 +18,8 @@ class Game():
 
         self.playerturn = random.randint(0,1)
 
-        card1 = random.sample(range(length-1), 10)
-        card2 = random.sample(range(length-1), 10)
+        card1 = random.sample(range(length), 10)
+        card2 = random.sample(range(length), 10)
 
         for i in range(5):
             player1cards.extend([data[card1[i]]])
@@ -123,10 +123,12 @@ class Game():
                 self.player2cards.remove(attacked_card)
                 self.remaining_cards2 -= 1
                 self.mana1 += 2
+                self.mana1 -= self.used_card[0]['special ability cost']
             else:
                 self.player2cards[attack_id]['hp'] -= self.used_card[0]['special ability damage']
                 print(f"{attacked_card[0]['name']} is at {self.player2cards[attack_id]['hp']} hp")
                 self.mana1 += 2
+                self.mana1 -= self.used_card[0]['special ability cost']
 
         elif self.playerturn%2 == 1:
             if self.used_card[0]['special ability damage'] >= attacked_card[0]['hp']:
@@ -134,69 +136,83 @@ class Game():
                 self.player1cards.remove(attacked_card)
                 self.remaining_cards1 -= 1
                 self.mana2 += 2
+                self.mana2 -= self.used_card[0]['special ability cost']
             else:
                 self.player1cards[attack_id]['hp'] -= self.used_card[0]['special ability damage']
                 print(f"{attacked_card[0]['name']} is at {self.player1cards[attack_id]['hp']} hp")
                 self.mana2 += 2
+                self.mana2 -= self.used_card[0]['special ability cost']
 
         self.playerturn += 1
-
+    #ALSO GOOD
     def self_heal(self):
         if self.playerturn%2 == 0:
             self.player1cards[self.cardlistid1]['hp'] += self.used_card[0]['special ability damage']
-            print(f"{self.player1cards[self.cardlistid1]['name']} is at {self.player1cards[self.cardlistid1]['hp']}")
+            print(f"{self.used_card[0]['name']} is at {self.player1cards[self.cardlistid1]['hp']}")
             self.mana1 += 2
+            self.mana1 -= self.used_card[0]['special ability cost']
         elif self.playerturn%2 == 1:
             self.player2cards[self.cardlistid2]['hp'] += self.used_card[0]['special ability damage']
-            print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']}")
+            print(f"{self.used_card[0]['name']} is at {self.player2cards[self.cardlistid2]['hp']}")
             self.mana2 += 2
+            self.mana2 -= self.used_card[0]['special ability cost']
         self.playerturn += 1
+    #SHOULD BE WORKING
     def single_heal(self):
-        cardlistid1 = 0
-        cardlistid2 = 0
+        index = 0
+        interact_card = []        
         if self.playerturn%2 == 0:
-            attacked_card = []
-            interact_card = input("What card would you like to interact with?: ")
+            user_input = input("What card would you like to interact with?: ")
             while True:
-                for card in self.remaining_cards1:
-                    if self.player1cards[card]['name'] in interact_card:
-                        attacked_card.extend([self.player1cards[card]['name']])
-                        cardlistid1 = card
-                        self.cardlistid1 = cardlistid1
+                for card in self.player1cards:
+                    if card['name'] in user_input:
+                        interact_card.extend([card])
+                        index = self.player1cards.index[card]
                         break
-                if not attacked_card:
-                    print("No results found.\nTry again")
-            self.player1cards[cardlistid1]['hp'] += self.used_card[0]['special ability damage']
-            print(f"{self.player1cards[cardlistid1]['name']} is at {self.player1cards[cardlistid1]['hp']}")
-            self.mana1 += 2
+                    if not interact_card:
+                        print("No results found.\nTry again.")
+
         elif self.playerturn%2 == 1:
-            attacked_card = []
-            interact_card = input("What card would you like to interact with?: ")
+            user_input = input("What card would you like to interact with?: ")
             while True:
-                for card in self.remaining_cards2:
-                    if self.player2cards[card]['name'] in interact_card:
-                        attacked_card.extend([self.player2cards[card]['name']])
-                        cardlistid2 = card
-                        self.cardlistid2 = cardlistid2
+                for card in self.player2cards:
+                    if card['name'] in user_input:
+                        interact_card.extend([card])
+                        index = self.player2cards.index[card]
                         break
-                if not attacked_card:
-                    print("No results found.\nTry again")
-            self.player2cards[cardlistid2]['hp'] += self.used_card[0]['special ability damage']
-            print(f"{self.player2cards[cardlistid2]['name']} is at {self.player2cards[cardlistid2]['hp']}")
+                    if not interact_card:
+                        print("No results found.\nTry again.")
+        
+        if self.playerturn%2 == 0:
+            self.player1cards[index]['hp'] += self.used_card[self.cardlistid1]['special ability damage']
+            print(f"{self.player1cards[index]['name']} is at {self.player1cards[index]['hp']}")
+            self.mana1 += 2
+            self.mana1 -= self.used_card[0]['special ability cost']
+
+        elif self.playerturn%2 == 1:
+            self.player2cards[index]['hp'] += self.used_card[self.cardlistid2]['special ability damage']
+            print(f"{self.player2cards[index]['name']} is at {self.player2cards[index]['hp']}")
             self.mana2 += 2
+            self.mana2 -= self.used_card[0]['special ability cost']
+        
+
         self.playerturn += 1
+    #MAYBE
     def mass_heal(self):
         if self.playerturn%2 == 0:
             for i in range(self.remaining_cards1):
                 self.player1cards[i]['hp'] += self.used_card[0]['special ability damage']
                 print(f"{self.player1cards[i]['name']} is at {self.player1cards[i]['hp']}")
                 self.mana1 += 2
+                self.mana1 -= self.used_card[0]['special ability cost']
         if self.playerturn%2 == 1:
             for i in range(self.remaining_cards2):
                 self.player2cards[i]['hp'] += self.used_card[0]['special ability damage']
                 print(f"{self.player2cards[i]['name']} is at {self.player2cards[i]['hp']}")
                 self.mana2 += 2
+                self.mana2 -= self.used_card[0]['special ability cost']
         self.playerturn += 1
+    
     def aoe(self):
         dead = []
         if self.playerturn%2 == 0:
@@ -211,6 +227,7 @@ class Game():
                 self.player2cards.remove(i)
                 self.remaining_cards2 -= len(dead)
             self.mana1 += 2
+            self.mana1 -= self.used_card[0]['special ability cost']
         elif self.playerturn%2 == 1:
             for i in range(self.remaining_cards1):
                 if self.player1cards[i]['hp'] - self.used_card[0]['special ability damage'] <= 0:
@@ -223,55 +240,56 @@ class Game():
                 self.player1cards.remove(i)
                 self.remaining_cards1 -= len(dead)
             self.mana2 += 2
+            self.mana2 -= self.used_card[0]['special ability cost']
         self.playerturn += 1
-
+    #SAME AS SPECIAL ATTACK SO IT SHOULD BE FINE
     def normal_attack(self):
-        good = 0
         attacked_card = []
-
-
-        while good != 1:
+        attack_id = 0
+        while True:
             if self.playerturn%2 == 0:
                 attack_card = input("What card would you like to interact with?: ")
-                for i in range(self.remaining_cards2):
-                    if attack_card in self.player2cards[i]['name']:
-                        attacked_card.extend(self.player2cards[i])
+                for card in self.player2cards:
+                    if attack_card == card['name']:
+                        attacked_card.extend([card])
+                        attack_id = self.player2cards.index(card)
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
-                    good = 1
+                    break
             elif self.playerturn%2 == 1:
                 attack_card = input("What card would you like to interact with?: ")
-                for i in range(self.remaining_cards1):
-                    if attack_card in self.player1cards[i]['name']:
-                        attacked_card.extend(self.player1cards[i])
+                for card in self.player1cards:
+                    if attack_card == card['name']:
+                        attacked_card.extend([card])
+                        attack_id = self.player1cards.index(card)
                 if not attacked_card:
                     print("No results found\nTry again")
                 else:
-                    good = 1
+                    break
+        print(attacked_card)
+        #attack part and health subtraction
         if self.playerturn%2 == 0:
 
-
-            if self.player2cards[self.cardlistid2]['hp'] - self.used_card[0]['damage']<= 0:
-                print(f"{self.player2cards[self.cardlistid2]['name']} has died")
-                self.player2cards.remove(self.player2cards[self.cardlistid1])
+            if self.used_card[0]['damage'] >= attacked_card[0]['hp']:
+                print(f"{attacked_card[0]['name']} has died")
+                self.player2cards.remove(attacked_card)
                 self.remaining_cards2 -= 1
                 self.mana1 += 2
             else:
-                self.player2cards[self.cardlistid2]['hp'] -= self.used_card[0]['damage']
-                print(f"{self.player2cards[self.cardlistid2]['name']} is at {self.player2cards[self.cardlistid2]['hp']} hp")
+                self.player2cards[attack_id]['hp'] -= self.used_card[0]['damage']
+                print(f"{attacked_card[0]['name']} is at {self.player2cards[attack_id]['hp']} hp")
                 self.mana1 += 2
 
         elif self.playerturn%2 == 1:
-
-
-            if self.player1cards[self.cardlistid1]['hp'] - self.used_card[0]['damage']<= 0:
-                print(f"{self.player1cards[self.cardlistid1]['name']} has died")
-                self.player1cards.remove(self.player1cards[self.cardlistid2])
+            if self.used_card[0]['damage'] >= attacked_card[0]['hp']:
+                print(f"{attacked_card[0]['name']} has died")
+                self.player1cards.remove(attacked_card)
                 self.remaining_cards1 -= 1
                 self.mana2 += 2
             else:
-                self.player1cards[self.cardlistid1]['hp'] -= self.used_card[0]['damage']
-                print(f"{self.player1cards[self.cardlistid1]['name']} is at {self.player1cards[self.cardlistid1]['hp']} hp")
+                self.player1cards[attack_id]['hp'] -= self.used_card[0]['damage']
+                print(f"{attacked_card[0]['name']} is at {self.player1cards[attack_id]['hp']} hp")
                 self.mana2 += 2
+
         self.playerturn += 1

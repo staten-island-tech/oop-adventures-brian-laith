@@ -8,7 +8,7 @@ game = Game()
 remaining_cards1 = game.remaining_cards1
 remaining_cards2 = game.remaining_cards2
 
-while remaining_cards1 != 0 or remaining_cards2 != 0:
+while remaining_cards1 > 0 or remaining_cards2 > 0:
 
     mana1 = game.mana1
     mana2 = game.mana2
@@ -18,7 +18,7 @@ while remaining_cards1 != 0 or remaining_cards2 != 0:
     ability_type = used_card[0]['ability type']
     special_ability = input("Would you like to use your special ability? Y/N: ").upper()
 
-    if playerturn == 0 and mana1 >= used_card[0]['special ability cost'] and special_ability == "Y":
+    if playerturn%2 == 0 and mana1 >= used_card[0]['special ability cost'] and special_ability == "Y":
         if ability_type == "attack":
             game.attack()
 
@@ -34,7 +34,7 @@ while remaining_cards1 != 0 or remaining_cards2 != 0:
         elif ability_type == "aoe":
             game.aoe()
 
-    elif playerturn == 1 and mana2 >= used_card[0]['special ability cost'] and special_ability == "Y":
+    elif playerturn%2 == 1 and mana2 >= used_card[0]['special ability cost'] and special_ability == "Y":
         if ability_type == "attack":
             game.attack()
 
@@ -50,18 +50,18 @@ while remaining_cards1 != 0 or remaining_cards2 != 0:
         elif ability_type == "aoe":
             game.aoe()
 
-    elif playerturn == 0 and mana1 < used_card[0]['special ability cost'] and special_ability == "Y":
+    elif playerturn%2 == 0 and mana1 < used_card[0]['special ability cost'] and special_ability == "Y":
         print("You're too broke, using normal attack")
         game.normal_attack()
 
-    elif playerturn ==  1 and mana2 < used_card[0]['special ability cost'] and special_ability == "Y":
+    elif playerturn%2 == 1 and mana2 < used_card[0]['special ability cost'] and special_ability == "Y":
         print("You're too broke, using normal attack")
         game.normal_attack()
 
-    elif playerturn == 0 and special_ability == "N":
+    elif playerturn%2 == 0 and special_ability == "N":
         game.normal_attack()
 
-    elif playerturn == 1 and special_ability == "N":
+    elif playerturn%2 == 1 and special_ability == "N":
         game.normal_attack()
         
 if remaining_cards1 == 0:
