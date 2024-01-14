@@ -212,7 +212,7 @@ class Game():
                 self.mana2 += 2
                 self.mana2 -= self.used_card[0]['special ability cost']
         self.playerturn += 1
-    
+    #????
     def aoe(self):
         dead = []
         if self.playerturn%2 == 0:

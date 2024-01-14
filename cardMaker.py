@@ -32,13 +32,6 @@ while again == "true":
         data.append(newCard)
         print(data)
 
-
-
-
-
-
-
-
     #No code needed below this line
     # Creates a new JSON file with the updated data
     new_file = "updated.json"
