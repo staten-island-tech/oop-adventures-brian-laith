@@ -120,7 +120,7 @@ class Game():
 
             if self.used_card[0]['special ability damage'] >= attacked_card[0]['hp']:
                 print(f"{attacked_card[0]['name']} has died")
-                self.player2cards.remove(attacked_card)
+                self.player2cards.remove(attacked_card[0])
                 self.remaining_cards2 -= 1
                 self.mana1 += 2
                 self.mana1 -= self.used_card[0]['special ability cost']
@@ -133,7 +133,7 @@ class Game():
         elif self.playerturn%2 == 1:
             if self.used_card[0]['special ability damage'] >= attacked_card[0]['hp']:
                 print(f"{attacked_card[0]['name']} has died")
-                self.player1cards.remove(attacked_card)
+                self.player1cards.remove(attacked_card[0])
                 self.remaining_cards1 -= 1
                 self.mana2 += 2
                 self.mana2 -= self.used_card[0]['special ability cost']
@@ -267,13 +267,12 @@ class Game():
                     print("No results found\nTry again")
                 else:
                     break
-        print(attacked_card)
         #attack part and health subtraction
         if self.playerturn%2 == 0:
 
             if self.used_card[0]['damage'] >= attacked_card[0]['hp']:
                 print(f"{attacked_card[0]['name']} has died")
-                self.player2cards.remove(attacked_card)
+                self.player2cards.remove(attacked_card[0])
                 self.remaining_cards2 -= 1
                 self.mana1 += 2
             else:
@@ -284,7 +283,7 @@ class Game():
         elif self.playerturn%2 == 1:
             if self.used_card[0]['damage'] >= attacked_card[0]['hp']:
                 print(f"{attacked_card[0]['name']} has died")
-                self.player1cards.remove(attacked_card)
+                self.player1cards.remove(attacked_card[0])
                 self.remaining_cards1 -= 1
                 self.mana2 += 2
             else:
