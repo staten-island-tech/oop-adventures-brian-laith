@@ -69,7 +69,7 @@ class Game():
         if self.playerturn%2 == 1:
             used_card = []
             print("Player 2's turn")
-            print(f"\nYou have {self.mana1} mana")
+            print(f"\nYou have {self.mana2} mana")
             print("\nYour cards are: \n")
             for i in self.player2cards:
                 print(i,"\n")
@@ -225,7 +225,7 @@ class Game():
                     print(f"\n{self.player2cards[i]['name']} is at {self.player2cards[i]['hp']} hp")
             for i in dead:
                 self.player2cards.remove(i)
-                self.remaining_cards2 -= len(dead)
+            self.remaining_cards2 -= len(dead)
             self.mana1 += 2
             self.mana1 -= self.used_card[0]['special ability cost']
         elif self.playerturn%2 == 1:
@@ -238,7 +238,7 @@ class Game():
                     print(f"\n{self.player1cards[i]['name']} is at {self.player1cards[i]['hp']} hp")
             for i in dead:
                 self.player1cards.remove(i)
-                self.remaining_cards1 -= len(dead)
+            self.remaining_cards1 -= len(dead)
             self.mana2 += 2
             self.mana2 -= self.used_card[0]['special ability cost']
         self.playerturn += 1

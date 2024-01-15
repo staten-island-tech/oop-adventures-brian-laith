@@ -5,11 +5,8 @@ data = json.load(test)
 
 
 game = Game()
-remaining_cards1 = game.remaining_cards1
-remaining_cards2 = game.remaining_cards2
 
-while remaining_cards1 > 0 or remaining_cards2 > 0:
-
+while True:
     mana1 = game.mana1
     mana2 = game.mana2
     playerturn = game.playerturn
@@ -63,8 +60,14 @@ while remaining_cards1 > 0 or remaining_cards2 > 0:
 
     elif playerturn%2 == 1 and special_ability == "N":
         game.normal_attack()
+    
+    remaining_cards1 = game.remaining_cards1
+    remaining_cards2 = game.remaining_cards2
+
+    if remaining_cards1 == 0 or remaining_cards2 == 0:
+        break
         
 if remaining_cards1 == 0:
-    print("Player 2 has won the game")
+    print("\nPlayer 2 has won the game!!!!")
 elif remaining_cards2 == 0:
-    print("Player 1 has won the game")
+    print("\nPlayer 1 has won the game!!!!")
