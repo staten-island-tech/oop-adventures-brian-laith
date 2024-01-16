@@ -16,7 +16,7 @@ while True:
     ability_type = used_card[0]['ability type']
     special_ability = input("Would you like to use your special ability? Y/N: ").upper()
 
-    #Extremely self explanatory. It's just checks for ability type and uses the corresponding function
+    #This checks for ability type and uses the corresponding function
 
     if playerturn%2 == 0 and mana1 >= used_card[0]['special ability cost'] and special_ability == "Y":
         if ability_type == "attack":
