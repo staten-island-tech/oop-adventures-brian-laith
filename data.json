@@ -205,5 +205,32 @@
         "ability type": "aoe",
         "special ability damage": 2220000,
         "special ability cost": 1
+    },
+    {
+        "name": "Brain",
+        "hp": 1,
+        "damage": 10,
+        "special ability": "asian power",
+        "ability type": "attack",
+        "special ability damage": 100000000000000000000000000000000000000000000000000,
+        "special ability cost": 2
+    },
+    {
+        "name": "Immortal Man",
+        "hp": 100,
+        "damage": -1000,
+        "special ability": "unkillable",
+        "ability type": "self heal",
+        "special ability damage": 10000000000000,
+        "special ability cost": 10
+    },
+    {
+        "name": "Thomas Brown",
+        "hp": 40,
+        "damage": 50,
+        "special ability": "reflective forehead",
+        "ability type": "aoe",
+        "special ability damage": 50,
+        "special ability cost": 3
     }
 ]
