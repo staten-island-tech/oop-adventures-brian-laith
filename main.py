@@ -6,6 +6,7 @@ data = json.load(test)
 
 game = Game()
 
+#The game will continuously run untill one player runs out of cards 
 while True:
     mana1 = game.mana1
     mana2 = game.mana2
@@ -14,6 +15,8 @@ while True:
     used_card = game.used_card
     ability_type = used_card[0]['ability type']
     special_ability = input("Would you like to use your special ability? Y/N: ").upper()
+
+    #Extremely self explanatory. It's just checks for ability type and uses the corresponding function
 
     if playerturn%2 == 0 and mana1 >= used_card[0]['special ability cost'] and special_ability == "Y":
         if ability_type == "attack":
@@ -47,6 +50,8 @@ while True:
         elif ability_type == "aoe":
             game.aoe()
 
+    #Too broke defaults to normal attack
+
     elif playerturn%2 == 0 and mana1 < used_card[0]['special ability cost'] and special_ability == "Y":
         print("You're too broke, using normal attack")
         game.normal_attack()
@@ -55,12 +60,15 @@ while True:
         print("You're too broke, using normal attack")
         game.normal_attack()
 
+    #Normal attack
+
     elif playerturn%2 == 0 and special_ability == "N":
         game.normal_attack()
 
     elif playerturn%2 == 1 and special_ability == "N":
         game.normal_attack()
     
+    #Remaining cards get transfered after all attacks to prevent second turn win bug
     remaining_cards1 = game.remaining_cards1
     remaining_cards2 = game.remaining_cards2
 
