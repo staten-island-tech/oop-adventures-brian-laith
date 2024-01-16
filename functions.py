@@ -161,15 +161,21 @@ class Game():
         index = 0
         interact_card = []        
         if self.playerturn%2 == 0:
-            user_input = input("What card would you like to interact with?: ")
             while True:
+                user_input = input("What card would you like to interact with?: ")
                 for card in self.player1cards:
                     if user_input in card['name']:
                         interact_card.extend([card])
-                        index = self.player1cards.index[card]
-                        break
-                    if not interact_card:
-                        print("No results found.\nTry again.")
+                        index = self.player1cards.index(card)
+                if not interact_card:
+                    print("No results found.\nTry again.")
+                else:
+                    break
+            self.player1cards[index]['hp'] += self.used_card[self.cardlistid1]['special ability damage']
+            print(f"\n{self.player1cards[index]['name']} is at {self.player1cards[index]['hp']} hp")
+            self.mana1 += 2
+            self.mana1 -= self.used_card[0]['special ability cost']
+            
 
         elif self.playerturn%2 == 1:
             user_input = input("What card would you like to interact with?: ")
@@ -177,24 +183,17 @@ class Game():
                 for card in self.player2cards:
                     if user_input in card['name']:
                         interact_card.extend([card])
-                        index = self.player2cards.index[card]
-                        break
-                    if not interact_card:
-                        print("No results found.\nTry again.")
-        
-        if self.playerturn%2 == 0:
-            self.player1cards[index]['hp'] += self.used_card[self.cardlistid1]['special ability damage']
-            print(f"\n{self.player1cards[index]['name']} is at {self.player1cards[index]['hp']} hp")
-            self.mana1 += 2
-            self.mana1 -= self.used_card[0]['special ability cost']
-
-        elif self.playerturn%2 == 1:
+                        index = self.player2cards.index(card)
+                if not interact_card:
+                    print("No results found.\nTry again.")
+                else:
+                    break
             self.player2cards[index]['hp'] += self.used_card[self.cardlistid2]['special ability damage']
             print(f"\n{self.player2cards[index]['name']} is at {self.player2cards[index]['hp']} hp")
             self.mana2 += 2
             self.mana2 -= self.used_card[0]['special ability cost']
-        
 
+            
         self.playerturn += 1
     
     def mass_heal(self):
